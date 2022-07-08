@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 11:03:55 by cmaroude          #+#    #+#              #
-#    Updated: 2022/07/08 15:40:20 by tmongell         ###   ########.fr        #
+#    Updated: 2022/07/08 19:29:32 by tmongell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,12 +26,14 @@ RM = rm -rf
 
 GCC = gcc -Wall -Werror -Wextra
 
+DIR		:= "\"$(shell pwd)/bin\""
+
 #rules====================================================================rules#
 
 all: ${NAME}
 
 %.o : %.c
-	${GCC} -c ${SRC}
+	${GCC} -c ${SRC} -D DIR=${DIR}
 
 library:	libft	gnl
 
@@ -45,8 +47,8 @@ gnl:
 
 $(NAME): ${OBJ} ${INCLUDE}
 	@make library
-	@${GCC} ${OBJ} ${LIBFT}/libft.a ${GNL}/get_next_line.a -o ${NAME}
-	@echo "\e[1,32mproject compiled\e[0m"
+	@${GCC} ${OBJ} -D BIN_DIR=${DIR} ${LIBFT}/libft.a ${GNL}/get_next_line.a -o ${NAME} -lreadline
+	@echo "project compiled"
 
 clean:
 	@make -sC ${LIBFT} clean
