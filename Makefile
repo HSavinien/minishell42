@@ -6,40 +6,64 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 11:03:55 by cmaroude          #+#    #+#              #
-#    Updated: 2022/07/08 13:40:54 by cmaroude         ###   ########.fr        #
+#    Updated: 2022/07/08 15:40:20 by tmongell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRC =	ft_main.c
+SRC =	main.c
 
-OBJ = $(SRC:.c=.o)
+OBJ = ${SRC:.c=.o}
 
-INCLUDE = ft_minishell.h
+INCLUDE = minishell.h
 
-LIBFT = libft
+LIBFT = library/libft
+
+GNL = library/get_next_line
+
 RM = rm -rf
-AR = ar rc
+
 GCC = gcc -Wall -Werror -Wextra
 
-all: $(NAME)
+#rules====================================================================rules#
+
+all: ${NAME}
 
 %.o : %.c
-	$(GCC) -c $(SRC)
+	${GCC} -c ${SRC}
 
-$(NAME): $(OBJ) $(INCLUDE)
-	make -C $(LIBFT) bonus
-	$(GCC) $(OBJ) $(LIBFT)/libft.a -o $(NAME)
+library:	libft	gnl
+
+libft:
+	@make -sC ${LIBFT}
+	@echo "libft compiled"
+
+gnl:
+	@make -sC ${GNL}
+	@echo "gnl compiled"
+
+$(NAME): ${OBJ} ${INCLUDE}
+	@make library
+	@${GCC} ${OBJ} ${LIBFT}/libft.a ${GNL}/get_next_line.a -o ${NAME}
+	@echo "\e[1,32mproject compiled\e[0m"
 
 clean:
-	make -C libft clean
-	$(RM) $(OBJ)
+	@make -sC ${LIBFT} clean
+	@make -sC ${GNL} clean
+	@${RM} ${OBJ}
+	@echo "project cleaned"
 
 fclean: clean
-	$(RM) libft/libft.a
-	$(RM) $(NAME)
+	@make -sC ${LIBFT} fclean
+	@make -sC ${GNL} fclean
+	@${RM} ${NAME}
+	@${RM} ${NAME}.dSYM
+	@echo "executable removed"
 
 re: fclean all
+
+debug: library
+	@${GCC} ${OBJ} ${LIBFT}/libft.a ${GNL}/get_next_line.a -o ${NAME} -g -fsanitize=address
 
 .PHONY: all clean fclean re
