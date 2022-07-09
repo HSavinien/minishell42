@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:42:46 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/09 17:57:55 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/07/09 18:10:47 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**get_path(char **env)
 	return (path);
 }
 
-void	do_cmd(char	*cmd, char **env, char **cmd_args)
+void	do_cmd(char	*cmd, char **args, char **env)
 {
 	char	**path;
 	char	*cmd_path;
