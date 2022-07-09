@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:42:46 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/08 20:14:01 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/09 17:57:55 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,16 @@ char	**get_path(char **env)
 	return (path);
 }
 
-void	do_cmd(char	*fct, char **env)
+void	do_cmd(char	*cmd, char **env, char **cmd_args)
 {
 	char	**path;
 	char	*cmd_path;
-	char	**args;
 	int		pid;
 	int		i;
 
 	pid = fork();
 	if (!pid)
 	{
-		fct = extract_args(fct, &args);
 		execve(fct, args, env);
 		try_path(fct, BIN_DIR, args, env);
 		path = get_path(env);
