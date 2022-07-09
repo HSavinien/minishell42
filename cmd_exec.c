@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:42:46 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/09 18:10:47 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/07/09 18:21:34 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,10 @@ void	do_cmd(char	*cmd, char **args, char **env)
 	if (!pid)
 	{
 		execve(fct, args, env);
-		try_path(fct, BIN_DIR, args, env);
 		path = get_path(env);
 		i = 0;
 		while (path[i])
-		{
-			cmd_path = ft_strjoin(path[i ++], "/");
-			cmd_path = ft_strjoin(cmd_path, fct);
-			execve(cmd_path, args, env);
-			free(cmd_path);
-		}
+			try_path(cmd, args, env);
 		error("comande not found");//might need correction
 	}
 	else
