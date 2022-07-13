@@ -1,4 +1,4 @@
-entré : char** contenant la ligne lue
+entré : linked_list containing strings
 si input NULL, return.
 searche for pipe. if pipe found, call pipe management function
 read each str of args : 
