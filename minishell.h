@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/08 19:34:31 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:54:12 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@
 
 # include "library/libft/libft.h"
 # include "library/get_next_line/get_next_line.h"
+
+
+//struct==================================================================struct
+
+typedef struct s_lst_token {
+	char				*content;
+	int					index;
+	struct	s_lst_token	*next;
+}	t_lst_token;
+
+//prototypes==========================================================prototypes
 
 int		main();
 void	cmd_exec(char	*fct, char **env);
