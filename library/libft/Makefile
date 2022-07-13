@@ -43,6 +43,7 @@ SRCS	=	ft_isdigit.c \
 			ft_isspace.c \
 			ft_split_word.c \
 			ft_memdup.c \
+			ft_strcmp.c \
 			get_next_line.c \
 			get_next_line_utils.c \
 			get_next_line_bonus.c \
