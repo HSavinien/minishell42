@@ -1,0 +1,24 @@
+main :
+
+while 1
+	capture all signal
+	readline (PS1)
+	analyse the line we found
+	call apropriate function depending on parsing
+
+
+
+line analyse : 
+if line len = 0, return
+add line to history
+
+lexer (improved split), return char **
+parse line
+
+
+
+parsing : 
+search for pipe
+	if found
+		function pipe that redirect in/out to pipe, then re_send token to parser : first all token before first pipe, then all token after first pipe. if there is multiple pipe, it act recursively.
+		
