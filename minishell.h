@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/13 13:54:12 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/19 17:29:15 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # ifndef BIN_DIR
 #  define BIN_DIR "./minishell/bin"
 # endif
+
+//includes==============================================================includes
 
 # include <string.h>
 # include <signal.h>
@@ -40,7 +42,18 @@ typedef struct s_lst_token {
 
 //prototypes==========================================================prototypes
 
-int		main();
-void	cmd_exec(char	*fct, char **env);
+//reading and history
+
+
+//lexer-parser
+
+
+//execution
+
+
+//signals
+
+
+//utils
 
 #endif
