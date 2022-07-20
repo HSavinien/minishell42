@@ -46,7 +46,7 @@ typedef struct s_lst_token {
 
 
 //lexer-parser
-
+void	ft_parser(t_lst_token **token);
 
 //execution
 
