@@ -6,13 +6,14 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 11:03:55 by cmaroude          #+#    #+#              #
-#    Updated: 2022/07/08 19:29:32 by tmongell         ###   ########.fr        #
+#    Updated: 2022/07/20 17:12:20 by tmongell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRC =	main.c
+SRC =	main.c \
+		srcs/var_expander.c \
 
 OBJ = ${SRC:.c=.o}
 
@@ -24,16 +25,15 @@ GNL = library/get_next_line
 
 RM = rm -rf
 
-GCC = gcc -Wall -Werror -Wextra
+CC = gcc 
+
+CFLAGS = -Wall -Werror -Wextra
 
 DIR		:= "\"$(shell pwd)/bin\""
 
 #rules====================================================================rules#
 
 all: ${NAME}
-
-%.o : %.c
-	${GCC} -c ${SRC} -D DIR=${DIR}
 
 library:	libft	gnl
 
@@ -47,7 +47,7 @@ gnl:
 
 $(NAME): ${OBJ} ${INCLUDE}
 	@make library
-	@${GCC} ${OBJ} -D BIN_DIR=${DIR} ${LIBFT}/libft.a ${GNL}/get_next_line.a -o ${NAME} -lreadline
+	@${CC} ${CFLAGS} ${OBJ} -D BIN_DIR=${DIR} ${LIBFT}/libft.a ${GNL}/get_next_line.a -o ${NAME} -lreadline
 	@echo "project compiled"
 
 clean:

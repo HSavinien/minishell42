@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/19 17:29:15 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/20 15:10:51 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_lst_token {
 
 //lexer-parser
 void	ft_parser(t_lst_token **token);
+char	*expand_vars(char *src, char **env);
 
 //execution
 
