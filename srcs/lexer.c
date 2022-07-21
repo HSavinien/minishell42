@@ -6,14 +6,23 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/13 19:09:23 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/21 16:06:07 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define HISTORY "./lexer_log"
+
 #include "../minishell.h"
 
+//filler function
+void	error(char *msg)
+{
+	printf("Error : %s\n", msg);
+	exit(42);
+}
+
 //get_tokens : get the line and the index of the first char to handle. return the extracted token and set index to the index of the next char to handle.
-static t_lst_token	*get_token(char *line, int *i, char **env)
+static t_lst_token	*get_token(char *line, int *i)
 {
 	t_lst_token	*new;
 	int			token_start;
@@ -22,21 +31,25 @@ static t_lst_token	*get_token(char *line, int *i, char **env)
 	if (!new)
 		error("unexpected malloc error");
 	while (ft_isspace(line[*i]))
-		*i ++;
+		*i += 1;
 	token_start = *i;
 	while (line[*i] && !ft_isspace(line[*i]))
-		*i+= lexer_checkcase(line + i, env);
-	new->content = ft_substr(line, token_start, i - token_start);
+		*i = *i + lexer_checkcase(line + *i);
+	new->content = ft_substr(line, token_start, *i - token_start);
+	new->content = trim_token(new->content);
 	return (new);
 }
 
-static void	add_history(char *line)
+static void	add_to_history(char *line)
 {
 	int	fd;
 
 	fd = open(HISTORY, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	if (fd > 0)
+	{
 		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
+	}
 	close(fd);
 }
 
@@ -47,22 +60,23 @@ void	give_index(t_lst_token *lst)
 	index = 0;
 	while (lst)
 	{
-		lst->content = index ++;
+		lst->index = index ++;
 		lst = lst->next;
 	}
 }
 
-static t_lst_token	*lexing(char *line, char **env)
+t_lst_token	*lexing(char *line, char **env)
 {
 	int			i;
 	t_lst_token	*tokens;
 	t_lst_token	*last;
 
+	i = 0;
 	if (!ft_strlen(line))
 		return (NULL);
-	add_history (line);
-	line = expand_vars(line);
-	tokens = get_token(line, &i, env);
+	add_to_history (line);
+	line = expand_vars(line, env);
+	tokens = get_token(line, &i);
 	last = tokens;
 	while (line[i])
 	{
@@ -71,5 +85,7 @@ static t_lst_token	*lexing(char *line, char **env)
 	}
 	last->next = NULL;
 	give_index(tokens);
+//	system("leaks minishell >&2");//debug
+	free(line);
 	return (tokens);
 }

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:06:31 by tmongell          #+#    #+#             */
-/*   Updated: 2022/04/29 19:16:19 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/21 14:42:34 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*trimed;
 
 	len = ft_get_final_lenght(s1, set);
-	trimed = malloc(len + 1);
+	trimed = ft_calloc(len + 1, sizeof(char));
 	if (trimed == NULL)
 		return (NULL);
 	ft_memset(trimed, 48, len);

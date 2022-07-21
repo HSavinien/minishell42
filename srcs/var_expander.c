@@ -59,7 +59,8 @@ char	*get_var_name(char *src, int *i)
 	start = *i; //jump the '$' char
 	start ++;
 	len = 0;
-	while (src[*i] && !ft_isspace(src[*i])) {
+	while (src[*i] && !ft_isspace(src[*i]) && src[*i] != '\"')
+	{
 		len ++;
 		*i = *i + 1;
 	}

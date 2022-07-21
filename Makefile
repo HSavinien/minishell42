@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 11:03:55 by cmaroude          #+#    #+#              #
-#    Updated: 2022/07/20 17:12:20 by tmongell         ###   ########.fr        #
+#    Updated: 2022/07/20 20:12:46 by tmongell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@ NAME = minishell
 
 SRC =	main.c \
 		srcs/var_expander.c \
+		srcs/lexer.c \
+		srcs/lexer_cases.c \
+
 
 OBJ = ${SRC:.c=.o}
 
