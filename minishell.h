@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/21 14:34:33 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/21 18:30:28 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char		*expand_vars(char *src, char **env);
 t_lst_token	*lexing(char *line, char **env);
 int			lexer_checkcase(char *line);
 char		*trim_token(char *src);
+void		ft_heredoc(t_lst_token  *token, t_lst_token *tmp);
 
 
 //execution
@@ -60,6 +61,9 @@ char		*trim_token(char *src);
 
 
 //utils
+char		**ft_construct(t_lst_token **token);
+void	ft_conc(t_lst_token **start, t_lst_token **actual);
+void	ft_skip(t_lst_token **tmp, int skip);
 
 
 //debug

@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 11:03:55 by cmaroude          #+#    #+#              #
-#    Updated: 2022/07/20 20:12:46 by tmongell         ###   ########.fr        #
+#    Updated: 2022/07/21 18:28:55 by cmaroude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ SRC =	main.c \
 		srcs/var_expander.c \
 		srcs/lexer.c \
 		srcs/lexer_cases.c \
+		srcs/parser.c \
+		srcs/parser_utils.c \
+		srcs/heredoc.c \
 
 
 OBJ = ${SRC:.c=.o}

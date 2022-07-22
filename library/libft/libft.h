@@ -77,4 +77,6 @@ void	*ft_reset_ptr(void	*ptr);
 int		ft_isspace(char c);
 char	**ft_split_word(char const *s);
 void	*ft_memdup(const void *mem);
+int	ft_strcmp(const char *s1, const char *s2);
+
 #endif
