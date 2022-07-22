@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:46:28 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/21 18:34:43 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/07/22 15:18:00 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,50 +35,44 @@ void	ft_do_pipe(t_lst_token **avpipe, t_lst_token **appipe)
 
 int	ft_redirect(t_lst_token *token, int redir)
 {
-	t_lst_token *tmp;
+	t_lst_token	*tmp;
 
 	tmp = token;
 	tmp = ((tmp)->next);
 	if (redir == 0)
 		return (0);
 	if (tmp->next == NULL)
-		return (-1);
-	if (redir == 1)
 	{
-		//redirect >;
+		printf("ERROR\n");
+		return (-1);
 	}
+	if (redir == 1)
+		;/*redirect > || <*/
 	if (redir == 2)
-		//redirect <;
+		;/*redirect >>*/
 	if (redir == 3)
-		//redirect >>;
-	if (redir == 4)
 		ft_heredoc(token, tmp);
-	printf("TOKEN:%s\n", (token)->content);
-	printf("REDIRECT FILE:%s\n", (tmp)->content);
 	printf("Let's handle redirect\n");
 	return (1);
 }
 
-
 int	verif_redirect(t_lst_token **actual)
 {
-	t_lst_token *tmp_act;
+	t_lst_token	*tmp_act;
 	int			redir;
 	int			verif;
 
 	tmp_act = *actual;
 	redir = 0;
-	verif = 0;
 	if (*actual == NULL)
 		return (0);
-	if (strcmp((*actual)->content, ">") == 0)
+	if (strcmp((*actual)->content, ">") == 0 \
+			|| ft_strcmp((*actual)->content, "<") == 0)
 		redir = 1;
-	if (ft_strcmp((*actual)->content, "<") == 0)
-		redir = 2;
 	if (ft_strcmp((*actual)->content, ">>") == 0)
-		redir = 3;
+		redir = 2;
 	if (ft_strcmp((*actual)->content, "<<") == 0)
-		redir = 4;
+		redir = 3;
 	verif = ft_redirect(tmp_act, redir);
 	if (verif == -1)
 		return (-1);
@@ -110,7 +104,7 @@ int	verif_pipe(t_lst_token **start, t_lst_token **actual)
 }
 
 void	ft_parser(t_lst_token **token)
-{ 
+{
 	t_lst_token	**re_start;
 	t_lst_token	*tmpstart;
 	char		**std_args;
@@ -119,29 +113,21 @@ void	ft_parser(t_lst_token **token)
 	re_start = token;
 	tmpstart = *re_start;
 	if (*token == NULL)
-		return;
+		return ;
 	while ((*token) != NULL)
 	{
-			if (verif_pipe(&tmpstart, token) == 1)
-				return;
-			else if ((*token) != NULL)
-				token = &((*token)->next);
+		if (verif_pipe(&tmpstart, token) == 1)
+			return ;
+		else if ((*token) != NULL)
+			token = &((*token)->next);
 	}
 	while (*re_start != NULL)
 	{
-			if (verif_redirect(re_start) == -1)
-			{	
-				printf("Error\n");
-				return;
-			}
-			else if (*re_start != NULL)
-				re_start = &((*re_start)->next);
+		if (verif_redirect(re_start) == -1)
+			return ;
+		else if (*re_start != NULL)
+			re_start = &((*re_start)->next);
 	}
 	std_args = ft_construct(&tmpstart);
-	if (std_args == NULL)
-	{
-		printf("Error\n");
-		return;
-	}
-//	execcmd(cmd, args, env)
+// execmd();
 }
