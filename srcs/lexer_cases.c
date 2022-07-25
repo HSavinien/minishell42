@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 16:11:48 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/21 16:07:27 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:49:28 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,33 @@ char	*remove_quote(char *src)
 	return (final);
 }
 
+void	remove_last_quote(char *str, char quote)
+{
+	int		i;
+
+	str = ft_strrchr(str, quote);
+	if (!str)
+		return;
+	i = 0;
+	while (str[i])
+	{
+		str[i] = str[i + 1];
+		i ++;
+	}
+}
+
 char	*trim_token(char *src)
 {
 	char	*trimed;
 	char	quote[3];
 	
-	quote[0] = -'$';
-	quote[1] = src[0];
+	quote[0] = src[0];
+	quote[1] = -'$';
 	quote[2] = '\0';
 	if (*src == '\"' || *src == '\'' || *src == -'$')
 	{
 		trimed = ft_strtrim(src, quote);
+		remove_last_quote(trimed, quote[0]);
 		free(src);
 	}
 	else

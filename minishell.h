@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/21 18:30:28 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/07/25 13:58:17 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # include "library/libft/libft.h"
 # include "library/get_next_line/get_next_line.h"
 
+//macros==================================================================macros
+
+# define PS1 "minishell :> "
+# define PS2 ">"
 
 //struct==================================================================struct
 
@@ -39,6 +43,13 @@ typedef struct s_lst_token {
 	int					index;
 	struct	s_lst_token	*next;
 }	t_lst_token;
+
+typedef struct s_fd_redirect {
+	int	in;
+	int	out;
+	int	base_stdin;
+	int	base_stdout;
+}	t_fd_redirect;
 
 //prototypes==========================================================prototypes
 

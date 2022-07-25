@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/21 16:06:07 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:50:36 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_lst_token	*get_token(char *line, int *i)
 	return (new);
 }
 
-static void	add_to_history(char *line)
+static void	add_logfile(char *line)
 {
 	int	fd;
 
@@ -74,8 +74,9 @@ t_lst_token	*lexing(char *line, char **env)
 	i = 0;
 	if (!ft_strlen(line))
 		return (NULL);
-	add_to_history (line);
+	add_logfile (line);//break stuff for some reason
 	line = expand_vars(line, env);
+	printf("expanded line : %s\n", line);//debug
 	tokens = get_token(line, &i);
 	last = tokens;
 	while (line[i])
@@ -85,7 +86,6 @@ t_lst_token	*lexing(char *line, char **env)
 	}
 	last->next = NULL;
 	give_index(tokens);
-//	system("leaks minishell >&2");//debug
 	free(line);
 	return (tokens);
 }
