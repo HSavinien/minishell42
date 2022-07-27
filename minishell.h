@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/27 15:26:51 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:16:03 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,12 @@ typedef struct s_fd_redir {
 
 typedef struct s_global_var {
 	char			*env;
-	int				ret_value;
+	int				ret;
 }	t_global_var;
+
+//globales==============================================================globales
+
+t_global_var	g_varvalues;
 
 //prototypes==========================================================prototypes
 
