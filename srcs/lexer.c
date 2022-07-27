@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/25 14:50:36 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:14:20 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static t_lst_token	*get_token(char *line, int *i)
 	new->content = trim_token(new->content);
 	return (new);
 }
-
+/*
 static void	add_logfile(char *line)
 {
 	int	fd;
@@ -52,7 +52,7 @@ static void	add_logfile(char *line)
 	}
 	close(fd);
 }
-
+*/
 void	give_index(t_lst_token *lst)
 {
 	int	index;
@@ -74,7 +74,7 @@ t_lst_token	*lexing(char *line, char **env)
 	i = 0;
 	if (!ft_strlen(line))
 		return (NULL);
-	add_logfile (line);//break stuff for some reason
+//	add_logfile (line);//break stuff for some reason
 	line = expand_vars(line, env);
 	printf("expanded line : %s\n", line);//debug
 	tokens = get_token(line, &i);

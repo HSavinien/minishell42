@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/25 13:58:17 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/27 15:26:51 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,17 @@ typedef struct s_lst_token {
 	struct	s_lst_token	*next;
 }	t_lst_token;
 
-typedef struct s_fd_redirect {
+typedef struct s_fd_redir {
 	int	in;
 	int	out;
 	int	base_stdin;
 	int	base_stdout;
-}	t_fd_redirect;
+}	t_fd_redir;
+
+typedef struct s_global_var {
+	char			*env;
+	int				ret_value;
+}	t_global_var;
 
 //prototypes==========================================================prototypes
 
@@ -57,12 +62,12 @@ typedef struct s_fd_redirect {
 
 
 //lexer-parser
-void		ft_parser(t_lst_token **token);
+int			ft_parser(t_lst_token *token, t_fd_redir *fds);
 char		*expand_vars(char *src, char **env);
 t_lst_token	*lexing(char *line, char **env);
 int			lexer_checkcase(char *line);
 char		*trim_token(char *src);
-void		ft_heredoc(t_lst_token  *token, t_lst_token *tmp);
+void		ft_heredoc(char *limit);
 
 
 //execution
@@ -72,12 +77,18 @@ void		ft_heredoc(t_lst_token  *token, t_lst_token *tmp);
 
 
 //utils
-char		**ft_construct(t_lst_token **token);
-void	ft_conc(t_lst_token **start, t_lst_token **actual);
+char	**ft_construct(t_lst_token *token);
+void	ft_break(t_lst_token **start, t_lst_token **actual);
 void	ft_skip(t_lst_token **tmp, int skip);
 
+//error management
+void	open_error(char *file);
+void	tech_error(char *msg);
 
 //debug
-void error(char	*msg);
+void	 error(char	*msg);
+int		execcmd(char **args);
+void	destroy_lst(t_lst_token *lst);
+void	display_lst(t_lst_token	*lst);
 
 #endif

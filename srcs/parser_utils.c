@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 14:14:20 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/21 18:30:45 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:17:36 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,27 @@ int	ft_structlstsize(t_lst_token *token)
 	return (size);
 }
 
-char	**ft_construct(t_lst_token **token)
+char	**ft_construct(t_lst_token *token)
 {
 	int		len;
 	char	**std_args;
 	int		i;
 
-	len = ft_structlstsize(*token);
+	len = ft_structlstsize(token);
 	std_args = malloc(sizeof (char *) * (len + 1));
 	if (std_args == NULL)
 		return (NULL);
 	i = 0;
-	while (i < len && (*token) != NULL)
+	while (i < len && token != NULL)
 	{
-		std_args[i++] = ft_strdup((*token)->content);
-		(token) = &((*token)->next);
+		std_args[i++] = ft_strdup(token->content);
+		(token) = token->next;
 	}
 	std_args[i] = NULL;
 	return (std_args);
 }
 
-void	ft_conc(t_lst_token **start, t_lst_token **actual)
+void	ft_break(t_lst_token **start, t_lst_token **actual)
 {
 	t_lst_token	*tmp_start;
 
