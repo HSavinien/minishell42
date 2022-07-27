@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 11:03:55 by cmaroude          #+#    #+#              #
-#    Updated: 2022/07/26 17:05:53 by tmongell         ###   ########.fr        #
+#    Updated: 2022/07/27 17:43:22 by cmaroude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,12 @@ NAME = minishell
 
 SRC =	main.c \
 		srcs/var_expander.c \
+		srcs/expander_utils.c \
 		srcs/lexer.c \
 		srcs/lexer_cases.c \
 		srcs/parser.c \
 		srcs/parser_utils.c \
+		srcs/parser_chevron.c \
 		filler_function.c \
 		srcs/error.c \
 

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 16:11:48 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/25 14:49:28 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:25:44 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	handle_quote(char *line, char quote)
 	return (i + 1);
 }
 
-int	lexer_checkcase(char	*line)
+int	lexer_checkcase(char *line)
 {
-	if (line[0] == '\'' || line[0] == '\"' || line[0] == -'$')
+	if (line[0] == '\'' || line[0] == '\"' || line[0] == -('$'))
 		return (handle_quote(line, line[0]));
 	else
 		return (1);
@@ -66,7 +66,7 @@ void	remove_last_quote(char *str, char quote)
 
 	str = ft_strrchr(str, quote);
 	if (!str)
-		return;
+		return ;
 	i = 0;
 	while (str[i])
 	{
@@ -79,11 +79,11 @@ char	*trim_token(char *src)
 {
 	char	*trimed;
 	char	quote[3];
-	
+
 	quote[0] = src[0];
-	quote[1] = -'$';
+	quote[1] = -('$');
 	quote[2] = '\0';
-	if (*src == '\"' || *src == '\'' || *src == -'$')
+	if (*src == '\"' || *src == '\'' || *src == -('$'))
 	{
 		trimed = ft_strtrim(src, quote);
 		remove_last_quote(trimed, quote[0]);

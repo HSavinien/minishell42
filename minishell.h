@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/27 16:16:03 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:45:11 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_fd_redir {
 }	t_fd_redir;
 
 typedef struct s_global_var {
-	char			*env;
+	char			**env;
 	int				ret;
 }	t_global_var;
 
@@ -67,8 +67,8 @@ t_global_var	g_varvalues;
 
 //lexer-parser
 int			ft_parser(t_lst_token *token, t_fd_redir *fds);
-char		*expand_vars(char *src, char **env);
-t_lst_token	*lexing(char *line, char **env);
+char		*expand_vars(char *src);
+t_lst_token	*lexing(char *line);
 int			lexer_checkcase(char *line);
 char		*trim_token(char *src);
 void		ft_heredoc(char *limit);
@@ -84,10 +84,15 @@ void		ft_heredoc(char *limit);
 char	**ft_construct(t_lst_token *token);
 void	ft_break(t_lst_token **start, t_lst_token **actual);
 void	ft_skip(t_lst_token **tmp, int skip);
+void	do_redirect_chevron(char *chevron, char *file, t_fd_redir *fds);
+void	check_forbidden_ends(t_lst_token *token);
+int		is_chevron(char *str);
 
 //error management
 void	open_error(char *file);
 void	tech_error(char *msg);
+int		max_var_len(char **env);
+
 
 //debug
 void	 error(char	*msg);

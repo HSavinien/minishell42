@@ -6,13 +6,12 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/27 14:14:20 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:41:57 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define HISTORY "./lexer_log"
-
 #include "../minishell.h"
+#define LOG_FILE "./lexer_log"
 
 //filler function
 void	error(char *msg)
@@ -21,7 +20,9 @@ void	error(char *msg)
 	exit(42);
 }
 
-//get_tokens : get the line and the index of the first char to handle. return the extracted token and set index to the index of the next char to handle.
+//get_tokens : get the line and the index of the first char to handle.
+//return the extracted token and set index to the
+//index of the next char to handle.
 static t_lst_token	*get_token(char *line, int *i)
 {
 	t_lst_token	*new;
@@ -53,6 +54,7 @@ static void	add_logfile(char *line)
 	close(fd);
 }
 */
+
 void	give_index(t_lst_token *lst)
 {
 	int	index;
@@ -65,7 +67,7 @@ void	give_index(t_lst_token *lst)
 	}
 }
 
-t_lst_token	*lexing(char *line, char **env)
+t_lst_token	*lexing(char *line)
 {
 	int			i;
 	t_lst_token	*tokens;
@@ -74,9 +76,7 @@ t_lst_token	*lexing(char *line, char **env)
 	i = 0;
 	if (!ft_strlen(line))
 		return (NULL);
-//	add_logfile (line);//break stuff for some reason
-	line = expand_vars(line, env);
-	printf("expanded line : %s\n", line);//debug
+	line = expand_vars(line);
 	tokens = get_token(line, &i);
 	last = tokens;
 	while (line[i])
