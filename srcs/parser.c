@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:46:28 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/27 17:25:22 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/07/28 19:09:50 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,41 @@
 
 void	do_pipe(t_lst_token *first_cmd, t_lst_token *sec_cmd, t_fd_redir *fds)
 {
+//	dprintf(2, "entering %s\n", __FUNCTION__);//debug
 	int	pipe_fd[2];
 	int	first_pid;
 	int	sec_pid;
 
 	if (pipe(pipe_fd))
 		tech_error("coud not create pipe");
-	dup2(pipe_fd[1], 1);
 	first_pid = fork();
 	if (!first_pid)
-		exit (ft_parser(first_cmd, fds));
-	dup2(fds->base_stdout, 1);
-	dup2(pipe_fd[0], 0);
+	{
+		dup2(pipe_fd[1], 1);
+		ft_parser(first_cmd, fds);
+		write(pipe_fd[1], "\0", 1);//debug
+		close(pipe_fd[1]);
+		exit(0);
+	}
 	sec_pid = fork();
 	if (!sec_pid)
 	{
-		exit (ft_parser(sec_cmd, fds));
+		dup2(pipe_fd[0], 0);
+		ft_parser(sec_cmd, fds);
+		close(pipe_fd[0]);
+		exit(0);
 	}
-	waitpid(sec_pid, &sec_pid, 0);
-	waitpid(first_pid, &first_pid, 0);
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
+	dprintf(2, "before waitpid\n");//debug
+	waitpid(sec_pid, 0, 0);
+	waitpid(first_pid, 0, 0);
+	dprintf(2, "after waitpid\n");//debug
+	dup2(fds->base_stdout, 1);
 	dup2(fds->base_stdin, 0);
 }
 
 int	verif_pipe(t_lst_token *start, t_lst_token *actual, t_fd_redir *fds)
 {
+//	dprintf(2, "entering %s\n", __FUNCTION__);//debug
 	t_lst_token	*tmp_start;
 	t_lst_token	*tmp_actual;
 
@@ -49,7 +58,7 @@ int	verif_pipe(t_lst_token *start, t_lst_token *actual, t_fd_redir *fds)
 		return (0);
 	if (ft_strcmp(actual->content, "|") == 0)
 	{	
-		ft_break(&tmp_start, &tmp_actual);
+		ft_break(tmp_start, &tmp_actual);
 		do_pipe(tmp_start, tmp_actual, fds);
 		return (1);
 	}
@@ -88,6 +97,7 @@ t_lst_token	*aplie_chevron(t_lst_token *chevron_tok, t_lst_token *lst_start,
 
 int	ft_parser(t_lst_token *token, t_fd_redir *fds)
 {
+//	dprintf(2, "entering %s\n", __FUNCTION__);//debug
 	t_lst_token	*re_start;
 	char		**std_args;
 
@@ -107,8 +117,8 @@ int	ft_parser(t_lst_token *token, t_fd_redir *fds)
 	{
 		if (is_chevron(token->content))
 			token = aplie_chevron(token, re_start, fds);
-	token = token->next;
+		token = token->next;
 	}
 	std_args = ft_construct(re_start);
-	return (execcmd(std_args));
+	return (exec_cmd(std_args[0], std_args, g_varvalues.env));
 }
