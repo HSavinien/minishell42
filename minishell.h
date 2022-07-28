@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/27 17:45:11 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:00:11 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_global_var	g_varvalues;
 //prototypes==========================================================prototypes
 
 //reading and history
+//static void	add_logfile(char *line);
 
 
 //lexer-parser
@@ -75,7 +76,7 @@ void		ft_heredoc(char *limit);
 
 
 //execution
-
+int	exec_cmd(char	*cmd, char **args, char **env);
 
 //signals
 

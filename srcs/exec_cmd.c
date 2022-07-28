@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_exec.c                                         :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 15:42:46 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/09 18:21:34 by cmaroude         ###   ########.fr       */
+/*   Created: 2022/07/27 15:58:47 by tmongell          #+#    #+#             */
+/*   Updated: 2022/07/28 14:22:29 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static void	try_path(char *cmd, char *path, char **args, char **env)
 {
 	char	*cmd_path;
 			
 	cmd_path = ft_strjoin(path, "/");
-	cmd_path = ft_strjoin(cmd_path, fct);
+	cmd_path = ft_strjoin(cmd_path, cmd);
 	execve(cmd_path, args, env);
 	free(cmd_path);
 }
@@ -38,23 +38,29 @@ char	**get_path(char **env)
 	return (path);
 }
 
-void	do_cmd(char	*cmd, char **args, char **env)
+
+
+int	exec_cmd(char	*cmd, char **args, char **env)
 {
 	char	**path;
-	char	*cmd_path;
 	int		pid;
 	int		i;
 
 	pid = fork();
 	if (!pid)
 	{
-		execve(fct, args, env);
+//		exec_buitins(cmd, args, env);
+		execve(cmd, args, env);
 		path = get_path(env);
 		i = 0;
 		while (path[i])
-			try_path(cmd, args, env);
+			try_path(cmd, path[i ++], args, env);
 		error("comande not found");//might need correction
 	}
 	else
+	{
 		waitpid(pid, &i, 0);
+		g_varvalues.ret = WEXITSTATUS(i);
+	}
+	return (g_varvalues.ret);
 }

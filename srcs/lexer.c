@@ -6,23 +6,14 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/27 17:41:57 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:59:28 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #define LOG_FILE "./lexer_log"
 
-//filler function
-void	error(char *msg)
-{
-	printf("Error : %s\n", msg);
-	exit(42);
-}
-
-//get_tokens : get the line and the index of the first char to handle.
-//return the extracted token and set index to the
-//index of the next char to handle.
+//get_tokens : get the line and the index of the first char to handle. return the extracted token and set index to the index of the next char to handle.
 static t_lst_token	*get_token(char *line, int *i)
 {
 	t_lst_token	*new;
@@ -40,20 +31,6 @@ static t_lst_token	*get_token(char *line, int *i)
 	new->content = trim_token(new->content);
 	return (new);
 }
-/*
-static void	add_logfile(char *line)
-{
-	int	fd;
-
-	fd = open(HISTORY, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	if (fd > 0)
-	{
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
-	}
-	close(fd);
-}
-*/
 
 void	give_index(t_lst_token *lst)
 {
@@ -74,9 +51,8 @@ t_lst_token	*lexing(char *line)
 	t_lst_token	*last;
 
 	i = 0;
-	if (!ft_strlen(line))
+	if (!line || !ft_strlen(line))
 		return (NULL);
-	line = expand_vars(line);
 	tokens = get_token(line, &i);
 	last = tokens;
 	while (line[i])

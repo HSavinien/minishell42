@@ -6,13 +6,13 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 11:03:55 by cmaroude          #+#    #+#              #
-#    Updated: 2022/07/27 17:43:22 by cmaroude         ###   ########.fr        #
+#    Updated: 2022/07/28 15:00:33 by tmongell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRC =	main.c \
+SRC =	minishell.c \
 		srcs/var_expander.c \
 		srcs/expander_utils.c \
 		srcs/lexer.c \
@@ -22,6 +22,9 @@ SRC =	main.c \
 		srcs/parser_chevron.c \
 		filler_function.c \
 		srcs/error.c \
+		srcs/exec_cmd.c \
+		srcs/lst_utils.c \
+#		srcs/logfile.c \
 
 
 OBJ = ${SRC:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:35:09 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/26 18:09:07 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:50:38 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,6 @@ void	segfault(int sig)
 	printf("segfault caught\n");
 }
 
-void	display_lst(t_lst_token	*lst)
-{
-	while (lst)
-	{
-		printf("%s <> ", lst->content);
-		lst = lst->next;
-	}
-	printf("\n");
-}
-
-void	destroy_lst(t_lst_token *lst)
-{
-	t_lst_token	*tmp;
-
-	while (lst)
-	{
-		tmp = lst->next;
-		free(lst->content);
-		free(lst);
-		lst = tmp;
-	}
-}
 
 /* test expander
 int	main(int ac, char **av, char **env)
@@ -101,6 +79,12 @@ void	reset_redirect(t_fd_redir *fds)
 	fds->out = -1;
 }
 
+void	init_global(char **env)
+{
+	g_varvalues.env = env;
+	g_varvalues.ret = 0;
+}
+/*
 int	main(int ac, char **av, char **env)
 {
 	char *line;
@@ -109,6 +93,7 @@ int	main(int ac, char **av, char **env)
 	t_fd_redir	*fds;
 
 	fds = init_fds();
+	init_global(env);
 	while (42)
 	{
 		reset_redirect(fds);
@@ -120,4 +105,13 @@ int	main(int ac, char **av, char **env)
 		ft_parser(end_line, fds);
 		destroy_lst(end_line);
 	}
+}
+*/
+
+int	main(int ac, char **av, char **env)
+{
+	if (ac <= 1)
+		return(printf("error args\n"));
+	exec_cmd(av[1], av + 1, env);
+	printf("comande exited with status %d\n", g_varvalues.ret);
 }

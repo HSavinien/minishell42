@@ -14,3 +14,11 @@ int	execcmd(char **args)
 	printf("\n");
 	return (0);
 }
+
+//filler function
+void	error(char *msg)
+{
+	printf("Error : %s\n", msg);
+	exit(42);
+}
+
