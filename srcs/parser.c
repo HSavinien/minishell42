@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:46:28 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/29 15:05:03 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/01 16:49:19 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_lst_token	*aplie_chevron(t_lst_token *chevron_tok, t_lst_token *lst_start,
 	return (previous);
 }
 
-int	ft_parser(t_lst_token *token, t_fd_redir *fds)
+int	parser_chevron(t_lst_token *token, t_fd_redir *fds)
 {
 //	dprintf(2, "entering %s\n", __FUNCTION__);//debug
 	t_lst_token	*re_start;
