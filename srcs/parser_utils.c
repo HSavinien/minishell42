@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 14:14:20 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/27 14:17:36 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/29 14:52:53 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,24 @@ char	**ft_construct(t_lst_token *token)
 	return (std_args);
 }
 
-void	ft_break(t_lst_token **start, t_lst_token **actual)
+void	ft_break(t_lst_token *start, t_lst_token **actual)
 {
 	t_lst_token	*tmp_start;
 
+	tmp_start = start;
 	if (actual == NULL)
 		return ;
-	while ((*start) != NULL)
+	while (tmp_start != NULL)
 	{
-		if (ft_strcmp((*start)->content, "|") == 0)
+		if (ft_strcmp(tmp_start->next->content, "|") == 0)
 		{
-			tmp_start = *start;
-			*start = NULL;
-			free(tmp_start);
+			tmp_start->next = NULL;
 			break ;
 		}
-		start = &((*start)->next);
+		tmp_start = tmp_start->next;
 	}
 	if (ft_strcmp((*actual)->content, "|") == 0)
-	{
 		*actual = (*actual)->next;
-	}
 }
 
 void	ft_skip(t_lst_token **tmp, int skip)
@@ -78,11 +75,7 @@ void	ft_skip(t_lst_token **tmp, int skip)
 		return ;
 	tmptoken = *tmp;
 	if (skip == 2)
-	{
 		(*tmp) = (*tmp)->next->next;
-	}
 	if (skip == 1)
-	{		
 		(*tmp) = ((*tmp)->next);
-	}
 }

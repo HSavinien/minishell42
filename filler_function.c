@@ -15,7 +15,6 @@ int	execcmd(char **args)
 	return (0);
 }
 
-//filler function
 void	error(char *msg)
 {
 	printf("Error : %s\n", msg);

@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:10 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/27 17:44:10 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/07/29 14:38:40 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,15 @@ void	check_repeting_specials(t_lst_token *token)
 			error("consecutive chevrons forbiden");
 		if (is_chevron(previous) && !ft_strcmp(token->content, "|"))
 			error("implicit file for redirection is forbiden");
+		previous = token->content;
+		token = token->next;
 	}
 }
 
 //check that the ends of the user input are not a pipe or a redirection.
 void	check_forbidden_ends(t_lst_token *token)
 {
+	//dprintf(2, "entering %s\n", __FUNCTION__);//debug
 	t_lst_token	*last;
 
 	if (!ft_strcmp(token->content, "|"))

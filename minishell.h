@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/28 15:00:11 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/29 14:32:58 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	exec_cmd(char	*cmd, char **args, char **env);
 
 //utils
 char	**ft_construct(t_lst_token *token);
-void	ft_break(t_lst_token **start, t_lst_token **actual);
-void	ft_skip(t_lst_token **tmp, int skip);
+void	ft_break(t_lst_token *start, t_lst_token **actual);
+void	ft_skip(t_lst_token **tmp, int skip);//not used anymore
 void	do_redirect_chevron(char *chevron, char *file, t_fd_redir *fds);
 void	check_forbidden_ends(t_lst_token *token);
 int		is_chevron(char *str);

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:47 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/28 14:22:29 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/01 15:43:01 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 static void	try_path(char *cmd, char *path, char **args, char **env)
 {
+//	dprintf(2, "entering %s\n", __FUNCTION__);//debug
 	char	*cmd_path;
 			
 	cmd_path = ft_strjoin(path, "/");
 	cmd_path = ft_strjoin(cmd_path, cmd);
 	execve(cmd_path, args, env);
 	free(cmd_path);
+//	dprintf(2, "exiting %s\n", __FUNCTION__);//debug
 }
 
 char	**get_path(char **env)
 {
+//	dprintf(2, "entering %s\n", __FUNCTION__);//debug
 	char	**path;
 	int		i;
 
@@ -35,10 +38,9 @@ char	**get_path(char **env)
 	path = ft_split(ft_strchr(env[i], '=') + 1, ':');
 	if (!*path)
 		error ("cmd not found (PATH empty)");//might need correction
+//	dprintf(2, "exiting %s\n", __FUNCTION__);//debug
 	return (path);
 }
-
-
 
 int	exec_cmd(char	*cmd, char **args, char **env)
 {
@@ -46,6 +48,7 @@ int	exec_cmd(char	*cmd, char **args, char **env)
 	int		pid;
 	int		i;
 
+//	dprintf(2, "entering %s\n", __FUNCTION__);//debug
 	pid = fork();
 	if (!pid)
 	{
@@ -55,12 +58,14 @@ int	exec_cmd(char	*cmd, char **args, char **env)
 		i = 0;
 		while (path[i])
 			try_path(cmd, path[i ++], args, env);
-		error("comande not found");//might need correction
+//		error("comande not found");//might need correction
 	}
 	else
 	{
 		waitpid(pid, &i, 0);
 		g_varvalues.ret = WEXITSTATUS(i);
+		close(1);
+//		dprintf(2, "exiting %s\n", __FUNCTION__);//debug
 	}
 	return (g_varvalues.ret);
 }

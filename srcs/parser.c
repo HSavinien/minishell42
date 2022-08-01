@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:46:28 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/28 19:09:50 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:05:03 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	do_pipe(t_lst_token *first_cmd, t_lst_token *sec_cmd, t_fd_redir *fds)
 	{
 		dup2(pipe_fd[1], 1);
 		ft_parser(first_cmd, fds);
-		write(pipe_fd[1], "\0", 1);//debug
+		dup2(fds->base_stdout, 1);
 		close(pipe_fd[1]);
 		exit(0);
 	}
@@ -34,7 +34,9 @@ void	do_pipe(t_lst_token *first_cmd, t_lst_token *sec_cmd, t_fd_redir *fds)
 	if (!sec_pid)
 	{
 		dup2(pipe_fd[0], 0);
+		dup2(fds->base_stdout, 1);
 		ft_parser(sec_cmd, fds);
+		dup2(fds->base_stdin, 0);
 		close(pipe_fd[0]);
 		exit(0);
 	}
@@ -42,8 +44,6 @@ void	do_pipe(t_lst_token *first_cmd, t_lst_token *sec_cmd, t_fd_redir *fds)
 	waitpid(sec_pid, 0, 0);
 	waitpid(first_pid, 0, 0);
 	dprintf(2, "after waitpid\n");//debug
-	dup2(fds->base_stdout, 1);
-	dup2(fds->base_stdin, 0);
 }
 
 int	verif_pipe(t_lst_token *start, t_lst_token *actual, t_fd_redir *fds)
