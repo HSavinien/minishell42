@@ -6,45 +6,11 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:46:28 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/29 15:05:03 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/01 17:41:39 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	do_pipe(t_lst_token *first_cmd, t_lst_token *sec_cmd, t_fd_redir *fds)
-{
-//	dprintf(2, "entering %s\n", __FUNCTION__);//debug
-	int	pipe_fd[2];
-	int	first_pid;
-	int	sec_pid;
-
-	if (pipe(pipe_fd))
-		tech_error("coud not create pipe");
-	first_pid = fork();
-	if (!first_pid)
-	{
-		dup2(pipe_fd[1], 1);
-		ft_parser(first_cmd, fds);
-		dup2(fds->base_stdout, 1);
-		close(pipe_fd[1]);
-		exit(0);
-	}
-	sec_pid = fork();
-	if (!sec_pid)
-	{
-		dup2(pipe_fd[0], 0);
-		dup2(fds->base_stdout, 1);
-		ft_parser(sec_cmd, fds);
-		dup2(fds->base_stdin, 0);
-		close(pipe_fd[0]);
-		exit(0);
-	}
-	dprintf(2, "before waitpid\n");//debug
-	waitpid(sec_pid, 0, 0);
-	waitpid(first_pid, 0, 0);
-	dprintf(2, "after waitpid\n");//debug
-}
 
 int	verif_pipe(t_lst_token *start, t_lst_token *actual, t_fd_redir *fds)
 {
@@ -104,15 +70,6 @@ int	ft_parser(t_lst_token *token, t_fd_redir *fds)
 	re_start = token;
 	if (!token || !token->content)
 		return (1);
-	check_forbidden_ends(token);
-	while (token)
-	{
-		if (verif_pipe(re_start, token, fds) == 1)
-			return (1);
-		else if (token != NULL)
-			token = token->next;
-	}
-	token = re_start;
 	while (token)
 	{
 		if (is_chevron(token->content))
@@ -121,4 +78,27 @@ int	ft_parser(t_lst_token *token, t_fd_redir *fds)
 	}
 	std_args = ft_construct(re_start);
 	return (exec_cmd(std_args[0], std_args, g_varvalues.env));
+}
+
+int	parser_entry(t_lst_tokens *tokens, t_fd_redir *fds)
+{
+	t_lst_token	*save_start;
+	int			nb_pipe;
+
+	if(!tokens || tokens->content)
+		return (1);
+	check_forbidden_ends(token);
+	nb_pipe = 0;
+	save_start = tokens;
+	while (tokens)
+	{
+		if (!ft_strcmp(tokens->content, "|"))
+			nb_pipe ++;
+		tokens = tokens->next;
+	}
+	if (!nb_pipe)
+		parser_chevrons(save_start, fds);
+	else
+		do_pipe(save_start, nb_pipe, fds);
+	return (0);
 }
