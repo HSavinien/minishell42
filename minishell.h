@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/01 16:49:32 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/02 19:18:14 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ typedef struct s_global_var {
 	char			**env;
 	int				ret;
 }	t_global_var;
+
+typedef int (*builtins_func) (int argc, char **argv);
+
+typedef struct s_dico {
+	char			*key;
+	builtins_func	fct;
+}	t_dico;
 
 //globales==============================================================globales
 
@@ -105,5 +112,13 @@ void	display_lst(t_lst_token	*lst);
 
 //other
 void	close_all_except(int *pipes[2], int except1, int except2);
+
+
+
+//builtins
+int		ft_pwd(int argc, char **argv);
+int		ft_env(int argc, char **argv);
+int		ft_exit(int argc, char **argv);
+
 
 #endif
