@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 11:03:55 by cmaroude          #+#    #+#              #
-#    Updated: 2022/07/28 15:00:33 by tmongell         ###   ########.fr        #
+#    Updated: 2022/08/02 19:20:18 by cmaroude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,11 @@ SRC =	minishell.c \
 		srcs/error.c \
 		srcs/exec_cmd.c \
 		srcs/lst_utils.c \
-#		srcs/logfile.c \
+		srcs/dico_builtins.c \
+		builtins/pwd.c \
+		builtins/env.c \
+		builtins/exit.c \
+#		srcs/logfile.c \#
 
 
 OBJ = ${SRC:.c=.o}
@@ -77,7 +81,10 @@ fclean: clean
 
 re: fclean all
 
+sanitize: library
+	@${CC} ${SRC} ${LIBFT}/libft.a -lreadline ${GNL}/get_next_line.a -o ${NAME}_sani -g -fsanitize=address
+
 debug: library
-	@${GCC} ${OBJ} ${LIBFT}/libft.a ${GNL}/get_next_line.a -o ${NAME} -g -fsanitize=address
+	@${CC} ${SRC} ${LIBFT}/libft.a -lreadline ${GNL}/get_next_line.a -o ${NAME}_debug -g
 
 .PHONY: all clean fclean re
