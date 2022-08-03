@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 11:38:43 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/02 14:27:33 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/03 19:06:52 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_env(int argc, char **argv)
 {
 	char	**env_cpy;
 	int		i;
-	
+
 	if (argc > 1)
 	{
 		ft_putstr_fd("env: ", 2);

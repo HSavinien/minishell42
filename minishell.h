@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/02 19:18:14 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:46:22 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,6 @@ void	close_all_except(int *pipes[2], int except1, int except2);
 int		ft_pwd(int argc, char **argv);
 int		ft_env(int argc, char **argv);
 int		ft_exit(int argc, char **argv);
-
+int		ft_unset(int argc, char **argv);
 
 #endif
