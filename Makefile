@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 11:03:55 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/04 16:00:29 by tmongell         ###   ########.fr        #
+#    Updated: 2022/08/04 20:03:53 by tmongell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC =	minishell.c \
 		builtins/pwd.c \
 		builtins/env.c \
 		builtins/exit.c \
+		builtins/unset.c \
 
 
 OBJ = ${SRC:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/04 16:30:06 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:02:42 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,6 @@ void	display_lst(t_lst_token	*lst);
 int		ft_pwd(int argc, char **argv);
 int		ft_env(int argc, char **argv);
 int		ft_exit(int argc, char **argv);
-
+int		ft_unset(int argc, char **argv);
 
 #endif
