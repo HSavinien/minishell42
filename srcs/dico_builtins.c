@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 18:37:21 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/02 19:16:56 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/03 15:58:30 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_builtins(char **std_args)
 	dico[4] = (t_dico){"export", &ft_export};
 	dico[5] = (t_dico){"unset", &ft_unset};
 	dico[6] = (t_dico){"echo", &ft_echo};
-	dico[7] = (t_dico){0, 0};
+	dico[7] = (t_dico){NULL, NULL};
 	i = 0;
 	while (dico[i].key && ft_strcmp(dico[i].key, std_args[0]))
 		i++;
