@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/02 19:18:14 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/04 16:30:06 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <limits.h>
 
 # include "library/libft/libft.h"
 # include "library/get_next_line/get_next_line.h"
@@ -38,6 +39,11 @@
 
 //struct==================================================================struct
 
+//typedef
+typedef int (*builtins_func) (int argc, char **argv);
+typedef int	t_pipe_array[(OPEN_MAX + 1) /2][2];
+
+//struct
 typedef struct s_lst_token {
 	char				*content;
 	int					index;
@@ -56,7 +62,6 @@ typedef struct s_global_var {
 	int				ret;
 }	t_global_var;
 
-typedef int (*builtins_func) (int argc, char **argv);
 
 typedef struct s_dico {
 	char			*key;
@@ -79,8 +84,12 @@ char		*expand_vars(char *src);
 t_lst_token	*lexing(char *line);
 int			lexer_checkcase(char *line);
 char		*trim_token(char *src);
+int			parser_entry(t_lst_token *tokens, t_fd_redir *fds);
 void		ft_heredoc(char *limit);
-
+void		do_pipe (t_lst_token *cmd, int nb_pipe, t_fd_redir *fds);
+void		dup_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes);
+void		close_unused_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes);
+void		close_all_except(t_pipe_array pipes, int except1, int except2);
 
 //execution
 int	exec_cmd(char	*cmd, char **args, char **env);
@@ -107,11 +116,6 @@ void	 error(char	*msg);
 int		execcmd(char **args);
 void	destroy_lst(t_lst_token *lst);
 void	display_lst(t_lst_token	*lst);
-
-
-
-//other
-void	close_all_except(int *pipes[2], int except1, int except2);
 
 
 

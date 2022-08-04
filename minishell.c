@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 11:46:51 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/02 09:48:22 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/04 16:29:23 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	use_line(char *line, t_fd_redir *fds)
 	//add_logfile(line);
 	line = expand_vars(line);
 	cmd_list = lexing(line);
-	parser_chevron(cmd_list, fds);
+	parser_entry(cmd_list, fds);
 }
 
 void	init_global(char **env)

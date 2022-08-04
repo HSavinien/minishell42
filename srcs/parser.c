@@ -6,12 +6,13 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:46:28 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/02 18:56:34 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:13:12 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
 int	verif_pipe(t_lst_token *start, t_lst_token *actual, t_fd_redir *fds)
 {
 	t_lst_token	*tmp_start;
@@ -31,6 +32,7 @@ int	verif_pipe(t_lst_token *start, t_lst_token *actual, t_fd_redir *fds)
 	else
 		return (0);
 }
+*/
 
 int	is_chevron(char *str)
 {
@@ -86,14 +88,14 @@ int	parser_chevron(t_lst_token *token, t_fd_redir *fds)
 	return (exec_cmd(std_args[0], std_args, g_varvalues.env));
 }
 
-int	parser_entry(t_lst_tokens *tokens, t_fd_redir *fds)
+int	parser_entry(t_lst_token *tokens, t_fd_redir *fds)
 {
 	t_lst_token	*save_start;
 	int			nb_pipe;
 
-	if(!tokens || tokens->content)
+	if(!tokens || !tokens->content)
 		return (1);
-	check_forbidden_ends(token);
+	check_forbidden_ends(tokens);
 	nb_pipe = 0;
 	save_start = tokens;
 	while (tokens)
@@ -103,7 +105,7 @@ int	parser_entry(t_lst_tokens *tokens, t_fd_redir *fds)
 		tokens = tokens->next;
 	}
 	if (!nb_pipe)
-		parser_chevrons(save_start, fds);
+		parser_chevron(save_start, fds);
 	else
 		do_pipe(save_start, nb_pipe, fds);
 	return (0);
