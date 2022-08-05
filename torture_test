@@ -1,0 +1,25 @@
+each folowing line is a line that shale be tested. char '#' shall be seen as a comment marker. a newline or a '#' end the coment. if lines are indented, it is a block that shall be used in order after the last unidented line.
+
+#chevrons :
+<
+>
+< <
+> >
+< infile #with infile existing
+< infile #with infile not existing
+> outfile #with correct right on outfile
+> outfile #with no right on outfile
+< infile > outfile #with and without right on files
+
+#opening other shell:
+bash | ls
+	ls
+	echo coucou
+bash > out #correct right on out
+	ls
+	echo coucou
+	cat out
+	rm out
+	exit
+	cat out
+
