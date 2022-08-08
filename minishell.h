@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/04 20:02:42 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:11:33 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_lst_token	*lexing(char *line);
 int			lexer_checkcase(char *line);
 char		*trim_token(char *src);
 int			parser_entry(t_lst_token *tokens, t_fd_redir *fds);
-void		ft_heredoc(char *limit);
+void		ft_heredoc(char *stop, t_fd_redir *fds);
 void		do_pipe (t_lst_token *cmd, int nb_pipe, t_fd_redir *fds);
 void		dup_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes);
 void		close_unused_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes);

@@ -6,13 +6,14 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 11:03:55 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/04 20:03:53 by tmongell         ###   ########.fr        #
+#    Updated: 2022/08/08 17:10:45 by tmongell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRC =	minishell.c \
+		filler_function.c \
 		srcs/var_expander.c \
 		srcs/expander_utils.c \
 		srcs/lexer.c \
@@ -20,9 +21,9 @@ SRC =	minishell.c \
 		srcs/parser.c \
 		srcs/parser_utils.c \
 		srcs/parser_chevron.c \
+		srcs/heredoc.c \
 		srcs/pipe.c \
 		srcs/pipe_utils.c \
-		filler_function.c \
 		srcs/error.c \
 		srcs/exec_cmd.c \
 		srcs/lst_utils.c \
