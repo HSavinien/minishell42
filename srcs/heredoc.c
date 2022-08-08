@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 14:18:19 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/08 17:53:00 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/08 19:49:29 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,18 @@
 //whe then have to send everything to stdin, so the next cmd can read it.
 void	ft_heredoc(char	*stop, t_fd_redir *fds)
 {
-	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//debug
 	char	*line;
 	int		pipe_fd[2];
 
+	//make sur 0 is stdin
+	close(fds->in);
+	dup2(fds->base_stdin, 0);
+	//create pipe to store text
 	if (pipe(pipe_fd))
 		tech_error("could not creat pipe for heredoc");
-	line = NULL;
-	while (!line || ft_strcmp(line, stop))
+	//read text until stop str is found
+	line = readline(PS2);
+	while (line && ft_strcmp(line, stop))
 	{
 		free(line);
 		line = readline(PS2);
@@ -31,9 +35,8 @@ void	ft_heredoc(char	*stop, t_fd_redir *fds)
 			write(pipe_fd[1], line, ft_strlen(line));
 	}
 	free(line);
-	close(fds->in);
+	//make it so that the next cmd read on the pipe, and close said pipe;
 	close(pipe_fd[1]);
 	fds->in = pipe_fd[0];
 	dup2(fds->in, 0);
-	dprintf(2, "exiting %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//debug
 }

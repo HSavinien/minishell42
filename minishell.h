@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/08 17:11:33 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/08 18:56:19 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/errno.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <readline/readline.h>
@@ -35,7 +36,7 @@
 //macros==================================================================macros
 
 # define PS1 "minishell :> "
-# define PS2 ">"
+# define PS2 "> "
 
 //struct==================================================================struct
 
