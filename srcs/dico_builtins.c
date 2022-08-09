@@ -6,13 +6,13 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 18:37:21 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/03 15:58:30 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:40:30 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_builtins(char **std_args)
+int	exec_builtins(char **std_args)
 {
 	int		argc;
 	int		i;
@@ -35,5 +35,5 @@ int	ft_builtins(char **std_args)
 	if (!dico[i].key || ft_strcmp(dico[i].key, std_args[0]))
 		return (1);
 	dico[i].fct(argc, std_args);
-	return (0);
+	exit(0);
 }

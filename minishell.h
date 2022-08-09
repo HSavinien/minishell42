@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/08 18:56:19 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:36:54 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ void		close_unused_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes);
 void		close_all_except(t_pipe_array pipes, int except1, int except2);
 
 //execution
-int	exec_cmd(char	*cmd, char **args, char **env);
+int			exec_cmd(char	*cmd, char **args, char **env);
+int			exec_builtins(char **std_args);
 
 //signals
 
@@ -125,5 +126,8 @@ int		ft_pwd(int argc, char **argv);
 int		ft_env(int argc, char **argv);
 int		ft_exit(int argc, char **argv);
 int		ft_unset(int argc, char **argv);
+int		ft_cd(int argc, char **argv);
+int		ft_export(int argc, char **argv);
+int		ft_echo(int argc, char **argv);
 
 #endif
