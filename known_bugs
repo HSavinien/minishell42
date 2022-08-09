@@ -1,29 +1,33 @@
 list of bug we need to solve in minishell :
 
-\033[1;4mPIPES :\033[0m
+/tPIPES :
 
 
-CHEVRONS :
-- no new prompt after a '<' chevron : we can type stuff, but it does nothing;
-- multiple bugs when using chevrons without cmd :
-	- segfault when doing a single redirection (in or out) without cmd;
-	- freeze when doing multiple output redirection without cmd;
-	- endless printing of prompt when doing multiple redirection including at least one input redirection, without cmd;
-- when redirectiong output to a file with no right, do cmd normaly
+/tCHEVRONS :
+	- no new prompt after a '<' chevron : we can type stuff, but it does nothing;
+	- multiple bugs when using chevrons without cmd :
+		- segfault when doing a single redirection (in or out) without cmd;
+		- freeze when doing multiple output redirection without cmd;
+		- endless printing of prompt when doing multiple redirection including at least one input redirection, without cmd;
+	- when redirectiong output to a file with no right, do cmd normaly
 
 
-LEXER_PARSER :
-- lexer can sometime add random char to line;
+/tLEXER_PARSER :
+	- lexer can sometime add random char to line;
 
 
-GENERAL SYNTAXE :
-- no difference between 'echo "|" ls' and 'echo | ls'
-- no error message when cmd don't exist
+/tGENERAL SYNTAXE :
+	- no difference between 'echo "|" ls' and 'echo | ls'
+	- (solved) no error message when cmd don't exist
 
-BUILTINS :
+/tBUILTINS :
+	exit :
+		- (solved) does not write 'exit' when used witout args
+		- (solved) does not put an error message when confronted to an empty string
+		- (solved) does not handle '+' sign in front of arg
+		- (solved) a sign without a number behind is seen as a number (exit + is valid)
 
+/tERROR MANAGEMENT :
+	- error are WIP, so lots of error.
 
-ERROR MANAGEMENT :
-- error are WIP, so lots of error.
-
-OTHER :
+/tOTHER :

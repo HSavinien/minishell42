@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 13:22:24 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/03 19:08:17 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:52:42 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	print_exit_err(char *str)
 {
-	ft_putendl_fd("exit", 2);
 	ft_putstr_fd("minishell: exit: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putendl_fd(": numeric argument required", 2);
@@ -26,23 +25,25 @@ int	ft_str_is_num(const char *str)
 
 	i = 0;
 	if (str == NULL)
-		return (1);
-	if (str[0] == '-')
+		return (0);
+	if (!str[0])
+		return (0);
+	if ((str[0] == '-' || str[0] == '+') && str[1])
 		i++;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-			return (1);
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int	ft_exit(int argc, char **argv)
 {
-	if (!ft_str_is_num(argv[1]))
+	ft_putendl_fd("exit", 2);
+	if (ft_str_is_num(argv[1]))
 	{
-		ft_putendl_fd("exit", 2);
 		if (argc > 2 && argv[2])
 		{	
 			ft_putendl_fd("minishell: exit: Too many arguments dunderhead", 2);
@@ -53,7 +54,7 @@ int	ft_exit(int argc, char **argv)
 		else
 			exit(ft_atoi(argv[1]));
 	}
-	if (ft_str_is_num(argv[1]) && argv[1])
+	if (!ft_str_is_num(argv[1]) && argv[1])
 	{
 		print_exit_err(argv[1]);
 		exit(255);
