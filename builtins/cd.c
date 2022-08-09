@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 19:24:30 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/09 15:34:07 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:19:12 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ void	ft_exchange_path_pwd(char *str)
 		ft_add_env(var_new, 0);
 	if (!g_varvalues.env[index_var])
 		return ;
+	dprintf(2, "var name: %s\n", str);
 	free(g_varvalues.env[index_var]);
-	g_varvalues.env[index_var] = str;
+	g_varvalues.env[index_var] = var_new;
+	dprintf(2, "var env: %s\n", g_varvalues.env[index_var]);
 }
 
 char	*ft_get_path(char **env, char *env_srch, int len_srch)
