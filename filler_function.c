@@ -22,7 +22,12 @@ int	ft_export(int argc, char **argv)
 
 int	ft_echo(int argc, char **argv)
 {
-	printf("filler for cmd echo\n");
-	(void) argv[argc];
-	return 0;
+	int i;
+
+	i = 1;
+	while (argv[i])
+		printf("%s ", argv[i ++]);
+	printf("\n");
+	return (0);
+	(void) argc;
 }
