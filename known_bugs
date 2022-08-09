@@ -13,7 +13,7 @@ list of bug we need to solve in minishell :
 
 
 /tLEXER_PARSER :
-	- lexer can sometime add random char to line;
+	- (solved) lexer can sometime add random char to line;
 
 
 /tGENERAL SYNTAXE :

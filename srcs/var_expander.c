@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:26:56 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/27 17:41:23 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/09 18:46:06 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*alocate_line(char *src)
 			nb_var ++;
 	}
 	nb_var *= max_var_len(g_varvalues.env);
-	return (ft_calloc(i + nb_var, sizeof(char)));
+	return (ft_calloc(i + 1 + nb_var, sizeof(char)));
 }
 
 //the main function malloc more memory than needed, this function get ride of
