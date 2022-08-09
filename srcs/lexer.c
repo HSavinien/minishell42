@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/28 14:59:28 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:13:10 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static t_lst_token	*get_token(char *line, int *i)
 	while (line[*i] && !ft_isspace(line[*i]))
 		*i = *i + lexer_checkcase(line + *i);
 	new->content = ft_substr(line, token_start, *i - token_start);
-	new->content = trim_token(new->content);
 	return (new);
 }
 

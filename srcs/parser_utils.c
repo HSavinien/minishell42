@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 14:14:20 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/08 15:11:41 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:57:06 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**ft_construct(t_lst_token *token)
 	while (i < len && token != NULL)
 	{
 		if (token->content != NULL)
-			std_args[i++] = ft_strdup(token->content);
+			std_args[i++] = ft_strdup(trim_token(token->content));
 		(token) = token->next;
 	}
 	std_args[i] = NULL;

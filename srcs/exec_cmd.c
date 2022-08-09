@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:47 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/09 14:57:17 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:05:40 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,17 @@ char	**get_path(char **env)
 //	dprintf(2, "exiting %s\n", __FUNCTION__);//debug
 	return (path);
 }
-
-void	exec_cmd(char	*cmd, char **args, char **env)
+//function that execute a cmd and it's args. 
+//it first try to execute it as a builtin, then try with execve
+//it always return 0, because the function that call it need a int function.
+int	exec_cmd(char	*cmd, char **args, char **env)
 {
 	char	**path;
 	int		pid;
 	int		i;
 
 	if (try_builtins(args))
-		return;
+		return (0);
 	pid = fork();
 	if (!pid)
 	{
@@ -66,5 +68,5 @@ void	exec_cmd(char	*cmd, char **args, char **env)
 		g_varvalues.ret = WEXITSTATUS(i);
 		close(1);
 	}
-	return;
+	return (0);
 }

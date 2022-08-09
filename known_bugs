@@ -17,7 +17,7 @@ list of bug we need to solve in minishell :
 
 
 /tGENERAL SYNTAXE :
-	- no difference between 'echo "|" ls' and 'echo | ls'
+	- (solved) no difference between 'echo "|" ls' and 'echo | ls'
 	- (solved) no error message when cmd don't exist
 
 /tBUILTINS :
