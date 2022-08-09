@@ -6,13 +6,16 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 18:37:21 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/09 14:40:30 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:56:54 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	exec_builtins(char **std_args)
+//check if the cmd in std_args[0] match any builtins, 
+//and execute it if it's the case.
+//return 1 on sucess, 0 if no builtins have been found;
+int	try_builtins(char **std_args)
 {
 	int		argc;
 	int		i;
@@ -33,7 +36,7 @@ int	exec_builtins(char **std_args)
 	while (dico[i].key && ft_strcmp(dico[i].key, std_args[0]))
 		i++;
 	if (!dico[i].key || ft_strcmp(dico[i].key, std_args[0]))
-		return (1);
+		return (0);
 	dico[i].fct(argc, std_args);
-	exit(0);
+	return (1);
 }

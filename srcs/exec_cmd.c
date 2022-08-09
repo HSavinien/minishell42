@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:47 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/09 14:44:21 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:57:17 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,17 @@ char	**get_path(char **env)
 	return (path);
 }
 
-int	exec_cmd(char	*cmd, char **args, char **env)
+void	exec_cmd(char	*cmd, char **args, char **env)
 {
 	char	**path;
 	int		pid;
 	int		i;
 
+	if (try_builtins(args))
+		return;
 	pid = fork();
 	if (!pid)
 	{
-		exec_builtins(args);
 		execve(cmd, args, env);
 		path = get_path(env);
 		i = 0;
@@ -65,5 +66,5 @@ int	exec_cmd(char	*cmd, char **args, char **env)
 		g_varvalues.ret = WEXITSTATUS(i);
 		close(1);
 	}
-	return (g_varvalues.ret);
+	return;
 }

@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/09 14:36:54 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:56:46 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void		close_unused_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes);
 void		close_all_except(t_pipe_array pipes, int except1, int except2);
 
 //execution
-int			exec_cmd(char	*cmd, char **args, char **env);
-int			exec_builtins(char **std_args);
+void		exec_cmd(char	*cmd, char **args, char **env);
+int			try_builtins(char **std_args);
 
 //signals
 
