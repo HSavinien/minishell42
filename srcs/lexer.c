@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/09 17:13:10 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:19:10 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_lst_token	*get_token(char *line, int *i)
 	new = malloc(sizeof(t_lst_token));
 	if (!new)
 		error("unexpected malloc error");
-	while (ft_isspace(line[*i]))
+	while (line[*i] && ft_isspace(line[*i]))
 		*i += 1;
 	token_start = *i;
 	while (line[*i] && !ft_isspace(line[*i]))
