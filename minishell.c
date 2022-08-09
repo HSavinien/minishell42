@@ -58,7 +58,7 @@ void	use_line(char *line, t_fd_redir *fds)
 	//add_logfile(line);
 	line = expand_vars(line);
 	cmd_list = lexing(line);
-	parser_chevron(cmd_list, fds);
+	parser_entry(cmd_list, fds);
 }
 
 void	init_global(char **env)

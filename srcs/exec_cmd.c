@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:47 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/01 15:43:01 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:44:21 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,22 @@ int	exec_cmd(char	*cmd, char **args, char **env)
 	int		pid;
 	int		i;
 
-//	dprintf(2, "entering %s\n", __FUNCTION__);//debug
 	pid = fork();
 	if (!pid)
 	{
-//		exec_buitins(cmd, args, env);
+		exec_builtins(args);
 		execve(cmd, args, env);
 		path = get_path(env);
 		i = 0;
 		while (path[i])
 			try_path(cmd, path[i ++], args, env);
-//		error("comande not found");//might need correction
+		error("comande not found");
 	}
 	else
 	{
 		waitpid(pid, &i, 0);
 		g_varvalues.ret = WEXITSTATUS(i);
 		close(1);
-//		dprintf(2, "exiting %s\n", __FUNCTION__);//debug
 	}
 	return (g_varvalues.ret);
 }

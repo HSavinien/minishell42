@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:10 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/29 14:38:40 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:13:36 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	check_repeting_specials(t_lst_token *token)
 //check that the ends of the user input are not a pipe or a redirection.
 void	check_forbidden_ends(t_lst_token *token)
 {
-	//dprintf(2, "entering %s\n", __FUNCTION__);//debug
 	t_lst_token	*last;
 
 	if (!ft_strcmp(token->content, "|"))
@@ -54,7 +53,7 @@ void	do_redirect_chevron_in(char *chevron, char *file, t_fd_redir *fds)
 {
 	close(fds->in);
 	if (!ft_strcmp(chevron, "<<"))
-		ft_heredoc(file);
+		ft_heredoc(file, fds);
 	else if (!ft_strcmp(chevron, "<"))
 	{
 		fds->in = open(file, O_RDONLY);
@@ -62,6 +61,8 @@ void	do_redirect_chevron_in(char *chevron, char *file, t_fd_redir *fds)
 			open_error(file);
 		dup2(fds->in, 0);
 	}
+	else
+		tech_error("entered redir_chevron_in with wrong chevron");
 }
 
 void	do_redirect_chevron_out(char *chevron, char *file, t_fd_redir *fds)

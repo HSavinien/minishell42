@@ -13,6 +13,7 @@
 NAME = minishell
 
 SRC =	minishell.c \
+		filler_function.c \
 		srcs/var_expander.c \
 		srcs/expander_utils.c \
 		srcs/lexer.c \
@@ -20,19 +21,19 @@ SRC =	minishell.c \
 		srcs/parser.c \
 		srcs/parser_utils.c \
 		srcs/parser_chevron.c \
-		filler_function.c \
+		srcs/heredoc.c \
+		srcs/pipe.c \
+		srcs/pipe_utils.c \
 		srcs/error.c \
 		srcs/exec_cmd.c \
 		srcs/lst_utils.c \
-		builtins/cd.c \
+		srcs/dico_builtins.c \
 		builtins/pwd.c \
 		builtins/env.c \
 		builtins/exit.c \
 		builtins/unset.c \
 		builtins/export.c \
 		builtins/builtins_utils.c \
-#		srcs/dico_builtins.c \
-		srcs/logfile.c \#
 
 
 OBJ = ${SRC:.c=.o}

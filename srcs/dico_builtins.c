@@ -6,13 +6,13 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 18:37:21 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/02 19:16:56 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:40:30 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_builtins(char **std_args)
+int	exec_builtins(char **std_args)
 {
 	int		argc;
 	int		i;
@@ -28,12 +28,12 @@ int	ft_builtins(char **std_args)
 	dico[4] = (t_dico){"export", &ft_export};
 	dico[5] = (t_dico){"unset", &ft_unset};
 	dico[6] = (t_dico){"echo", &ft_echo};
-	dico[7] = (t_dico){0, 0};
+	dico[7] = (t_dico){NULL, NULL};
 	i = 0;
 	while (dico[i].key && ft_strcmp(dico[i].key, std_args[0]))
 		i++;
 	if (!dico[i].key || ft_strcmp(dico[i].key, std_args[0]))
 		return (1);
 	dico[i].fct(argc, std_args);
-	return (0);
+	exit(0);
 }

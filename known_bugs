@@ -1,0 +1,29 @@
+list of bug we need to solve in minishell :
+
+\033[1;4mPIPES :\033[0m
+
+
+CHEVRONS :
+- no new prompt after a '<' chevron : we can type stuff, but it does nothing;
+- multiple bugs when using chevrons without cmd :
+	- segfault when doing a single redirection (in or out) without cmd;
+	- freeze when doing multiple output redirection without cmd;
+	- endless printing of prompt when doing multiple redirection including at least one input redirection, without cmd;
+- when redirectiong output to a file with no right, do cmd normaly
+
+
+LEXER_PARSER :
+- lexer can sometime add random char to line;
+
+
+GENERAL SYNTAXE :
+- no difference between 'echo "|" ls' and 'echo | ls'
+- no error message when cmd don't exist
+
+BUILTINS :
+
+
+ERROR MANAGEMENT :
+- error are WIP, so lots of error.
+
+OTHER :

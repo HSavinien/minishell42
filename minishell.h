@@ -23,11 +23,13 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/errno.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <errno.h>
+# include <limits.h>
 
 # include "library/libft/libft.h"
 # include "library/get_next_line/get_next_line.h"
@@ -35,10 +37,15 @@
 //macros==================================================================macros
 
 # define PS1 "minishell :> "
-# define PS2 ">"
+# define PS2 "> "
 
 //struct==================================================================struct
 
+//typedef
+typedef int (*builtins_func) (int argc, char **argv);
+typedef int	t_pipe_array[(OPEN_MAX + 1) /2][2];
+
+//struct
 typedef struct s_lst_token {
 	char				*content;
 	int					index;
@@ -57,7 +64,6 @@ typedef struct s_global_var {
 	int				ret;
 }	t_global_var;
 
-typedef int (*builtins_func) (int argc, char **argv);
 
 typedef struct s_dico {
 	char			*key;
@@ -80,11 +86,16 @@ char		*expand_vars(char *src);
 t_lst_token	*lexing(char *line);
 int			lexer_checkcase(char *line);
 char		*trim_token(char *src);
-void		ft_heredoc(char *limit);
-
+int			parser_entry(t_lst_token *tokens, t_fd_redir *fds);
+void		ft_heredoc(char *stop, t_fd_redir *fds);
+void		do_pipe (t_lst_token *cmd, int nb_pipe, t_fd_redir *fds);
+void		dup_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes);
+void		close_unused_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes);
+void		close_all_except(t_pipe_array pipes, int except1, int except2);
 
 //execution
-int	exec_cmd(char	*cmd, char **args, char **env);
+int			exec_cmd(char	*cmd, char **args, char **env);
+int			exec_builtins(char **std_args);
 
 //signals
 
@@ -111,11 +122,6 @@ void	display_lst(t_lst_token	*lst);
 
 
 
-//other
-void	close_all_except(int *pipes[2], int except1, int except2);
-
-
-
 //builtins
 int		ft_pwd(int argc, char **argv);
 int		ft_env(int argc, char **argv);
@@ -123,6 +129,7 @@ int		ft_exit(int argc, char **argv);
 int		ft_unset(int argc, char **argv);
 int		ft_cd(int argc, char **argv);
 int		ft_export(int argc, char **argv);
+int		ft_echo(int argc, char **argv);
 
 
 //builtins utils
