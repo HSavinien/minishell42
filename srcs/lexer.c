@@ -6,14 +6,15 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/09 19:19:10 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:31:04 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #define LOG_FILE "./lexer_log"
 
-//get_tokens : get the line and the index of the first char to handle. return the extracted token and set index to the index of the next char to handle.
+//get_tokens : get the line and the index of the first char to handle.
+//return the extracted token and set index to the index of the next char to handle.
 static t_lst_token	*get_token(char *line, int *i)
 {
 	t_lst_token	*new;

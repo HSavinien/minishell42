@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 16:11:48 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/09 16:37:58 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:30:20 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	remove_last_quote(char *str, char quote)
 		i ++;
 	}
 }
-//this tqke a string, and remove any quote or assimilated around the token.
+
+//this take a string, and remove any quote or assimilated around the token.
 char	*trim_token(char *src)
 {
 	char	*trimed;

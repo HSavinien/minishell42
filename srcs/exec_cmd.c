@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:47 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/09 17:05:40 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:34:12 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	try_path(char *cmd, char *path, char **args, char **env)
 {
 //	dprintf(2, "entering %s\n", __FUNCTION__);//debug
 	char	*cmd_path;
-			
+
 	cmd_path = ft_strjoin(path, "/");
 	cmd_path = ft_strjoin(cmd_path, cmd);
 	execve(cmd_path, args, env);
@@ -41,6 +41,7 @@ char	**get_path(char **env)
 //	dprintf(2, "exiting %s\n", __FUNCTION__);//debug
 	return (path);
 }
+
 //function that execute a cmd and it's args. 
 //it first try to execute it as a builtin, then try with execve
 //it always return 0, because the function that call it need a int function.

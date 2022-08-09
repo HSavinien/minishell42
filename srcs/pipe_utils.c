@@ -6,15 +6,16 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:24:39 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/04 15:52:31 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:35:11 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../minishell.h"
+#include "../minishell.h"
 
 void	close_all_except(t_pipe_array pipes, int except1, int except2)
 {
-	int i;
+	int	i;
+
 	if (!pipes)
 		return ;
 	if (except1 <= 2)

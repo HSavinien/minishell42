@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:38:12 by tmongell          #+#    #+#             */
-/*   Updated: 2022/05/14 19:00:28 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:19:29 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ void	*ft_reset_ptr(void	*ptr);
 int		ft_isspace(char c);
 char	**ft_split_word(char const *s);
 void	*ft_memdup(const void *mem);
-int	ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:46:28 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/08 15:47:56 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:29:39 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	parser_entry(t_lst_token *tokens, t_fd_redir *fds)
 	t_lst_token	*save_start;
 	int			nb_pipe;
 
-	if(!tokens || !tokens->content)
+	if (!tokens || !tokens->content)
 		return (1);
 	check_forbidden_ends(tokens);
 	nb_pipe = 0;

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:34:05 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/04 19:56:05 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:32:50 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //function that open every pipes needed, and store them in pipe_ends. 
 int	init_pipe(t_pipe_array pipe_ends, int nb_pipe)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < nb_pipe)
@@ -40,8 +40,8 @@ int	init_pipe(t_pipe_array pipe_ends, int nb_pipe)
 t_lst_token	*get_subcmd(t_lst_token **base_cmd, int num_cmd, int nb_pipe)
 {
 	t_lst_token	*sub_cmd;
-	t_lst_token *before_pipe;
-	
+	t_lst_token	*before_pipe;
+
 	if (num_cmd == nb_pipe)
 		return (*base_cmd);
 	sub_cmd = *base_cmd;
@@ -62,18 +62,20 @@ t_lst_token	*get_subcmd(t_lst_token **base_cmd, int num_cmd, int nb_pipe)
 //go ask the fucking norminette
 int	get_nb_pipes(t_pipe_array pipes)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (pipes[i][0] >= 0)
 		i ++;
 	return (i);
 }
+
 //this function execute the action the child_process should do.
 //note : the arg pip should be called pipes, but it whould make a norm error...
 void	pipe_child(t_lst_token *cmd, int num, t_pipe_array pip, t_fd_redir *fd)
 {
 	int	nb_pipe;
+
 	nb_pipe = get_nb_pipes(pip);
 	close_unused_pipe(num, nb_pipe, pip);
 	dup_pipe(num, nb_pipe, pip);
