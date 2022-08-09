@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/03 17:46:22 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:47:42 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <errno.h>
 
 # include "library/libft/libft.h"
 # include "library/get_next_line/get_next_line.h"
@@ -120,5 +121,16 @@ int		ft_pwd(int argc, char **argv);
 int		ft_env(int argc, char **argv);
 int		ft_exit(int argc, char **argv);
 int		ft_unset(int argc, char **argv);
+int		ft_cd(int argc, char **argv);
+int		ft_export(int argc, char **argv);
+
+
+//builtins utils
+int		ft_find_index(char **env, char *env_srch, int len);
+int		ft_str_is_valid(char *str);
+char	**ft_realloc_char(char **ptr, int len, int hidden, char *str);
+void	ft_add_env(char *str, int hidden);
+void	ft_exchange_env(int index, char *argv);
+void	ft_remove_element(int *index);
 
 #endif

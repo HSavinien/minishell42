@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 11:03:55 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/03 18:28:33 by cmaroude         ###   ########.fr        #
+#    Updated: 2022/08/08 18:47:20 by cmaroude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,13 @@ SRC =	minishell.c \
 		srcs/error.c \
 		srcs/exec_cmd.c \
 		srcs/lst_utils.c \
+		builtins/cd.c \
 		builtins/pwd.c \
 		builtins/env.c \
 		builtins/exit.c \
 		builtins/unset.c \
+		builtins/export.c \
+		builtins/builtins_utils.c \
 #		srcs/dico_builtins.c \
 		srcs/logfile.c \#
 

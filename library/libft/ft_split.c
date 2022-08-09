@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 12:54:11 by tmongell          #+#    #+#             */
-/*   Updated: 2022/04/29 19:15:41 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:56:42 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*ft_get_substr(char const *s, char sep, int num)
 
 	str = ft_find_substr(s, sep, num);
 	i = 0;
-	while (str[i] != sep)
+	while (str[i] && str[i] != sep)
 		i ++;
 	str = ft_strndup(str, i);
 	return (str);

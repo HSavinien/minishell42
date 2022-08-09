@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 11:46:51 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/02 09:48:22 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:43:51 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,17 @@ void	use_line(char *line, t_fd_redir *fds)
 
 void	init_global(char **env)
 {
-	g_varvalues.env = env;
+	int len;
+
+	len = 0;
+	while (env[len])
+		len++;
+	g_varvalues.env = malloc(sizeof(char *) * (len + 2));
+	len = -1;
+	while (env[++len])
+		g_varvalues.env[len] = ft_strdup(env[len]);
+	g_varvalues.env[len] = NULL;
+	g_varvalues.env[len + 1] = NULL;
 	g_varvalues.ret = 0;
 }
 
