@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:47 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/09 19:34:12 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:08:55 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,16 @@
 
 static void	try_path(char *cmd, char *path, char **args, char **env)
 {
-//	dprintf(2, "entering %s\n", __FUNCTION__);//debug
 	char	*cmd_path;
 
 	cmd_path = ft_strjoin(path, "/");
 	cmd_path = ft_strjoin(cmd_path, cmd);
 	execve(cmd_path, args, env);
 	free(cmd_path);
-//	dprintf(2, "exiting %s\n", __FUNCTION__);//debug
 }
 
 char	**get_path(char **env)
 {
-//	dprintf(2, "entering %s\n", __FUNCTION__);//debug
 	char	**path;
 	int		i;
 
@@ -34,11 +31,10 @@ char	**get_path(char **env)
 	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
 		i ++;
 	if (!env[i])
-		error ("cmd not found (no PATH)");//might need correction
+		error ("cmd not found (no PATH)");
 	path = ft_split(ft_strchr(env[i], '=') + 1, ':');
 	if (!*path)
-		error ("cmd not found (PATH empty)");//might need correction
-//	dprintf(2, "exiting %s\n", __FUNCTION__);//debug
+		error ("cmd not found (PATH empty)");
 	return (path);
 }
 
@@ -51,6 +47,8 @@ int	exec_cmd(char	*cmd, char **args, char **env)
 	int		pid;
 	int		i;
 
+	if(!cmd)
+		return (0);
 	if (try_builtins(args))
 		return (0);
 	pid = fork();

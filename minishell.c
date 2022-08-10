@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 11:46:51 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/10 18:46:58 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/10 19:22:57 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,14 @@ void	reset_redirection(t_fd_redir *fds)
 		close(fds->in);
 	if (fds->out != 1)
 		close(fds->out);
-	fds->base_stdin = dup(0);
-	fds->base_stdout = dup(1);
-	dup2(0, fds->base_stdin);
-	dup2(1, fds->base_stdout);
+//	fds->base_stdin = dup(0);
+//	fds->base_stdout = dup(1);
+	dup2(fds->base_stdin, 0);
+	dup2(fds->base_stdout, 1);
 }
 
 void	use_line(char *line, t_fd_redir *fds)
 {
-//	dprintf(2, "entering function %s\n", __FUNCTION__);//debug
 	t_lst_token	*cmd_list;
 
 	if (!line || !ft_strlen(line))
@@ -104,6 +103,5 @@ int	main(int ac, char **av, char **env)
 			add_history(line);
 		tcsetattr(STDIN_FILENO, TCSANOW, &exec);
 		use_line(line, fds);
-	//	free(line);
 	}
 }

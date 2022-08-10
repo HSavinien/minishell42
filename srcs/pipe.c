@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:34:05 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/09 19:32:50 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/10 15:12:17 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ void	do_pipe(t_lst_token *cmd, int nb_pipe, t_fd_redir *fds)
 	pid = ft_calloc(nb_pipe + 2, sizeof(int));
 	if (init_pipe(pipe_ends, nb_pipe))
 		tech_error("could not open some pipes");
-	num_cmd = 0;
-	while (num_cmd <= nb_pipe)
+	num_cmd = -1;
+	while (++ num_cmd <= nb_pipe)
 	{
 		sub_cmd = get_subcmd(&cmd, num_cmd, nb_pipe);
 		pid[num_cmd] = fork();
@@ -107,9 +107,10 @@ void	do_pipe(t_lst_token *cmd, int nb_pipe, t_fd_redir *fds)
 		if (!pid[num_cmd])
 			return (pipe_child(sub_cmd, num_cmd, pipe_ends, fds));
 		if (num_cmd)
+		{
 			close(pipe_ends[num_cmd - 1][0]);
 			close(pipe_ends[num_cmd - 1][1]);
-		num_cmd ++;
+		}
 	}
 	while (num_cmd >= 0)
 		waitpid(pid[num_cmd --], NULL, 0);

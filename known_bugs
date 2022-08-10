@@ -4,12 +4,17 @@ list of bug we need to solve in minishell :
 
 
 /tCHEVRONS :
-	- no new prompt after a '<' chevron : we can type stuff, but it does nothing;
+	- (solved) no new prompt after a '<' or '<<' chevron : we can type stuff, but it does nothing;
 	- multiple bugs when using chevrons without cmd :
-		- segfault when doing a single redirection (in or out) without cmd;
-		- freeze when doing multiple output redirection without cmd;
-		- endless printing of prompt when doing multiple redirection including at least one input redirection, without cmd;
+		- (solved) segfault when doing a single redirection (in or out) without cmd;
+		- (solved) freeze when doing multiple output redirection without cmd;
+		- when doing multiple output redirection, second file is not created;
+		- (solved) endless printing of prompt when doing multiple redirection including at least one input redirection, without cmd;
+		- when doing multiple redirect with one input redir and some output redir, the first output file is not created. if there was only one output file, it says cmd not found.
 	- when redirectiong output to a file with no right, do cmd normaly
+	- heredocs (solved) :
+		- (solved) do not put '\n' between lines
+		- (solved) does not consider the first line of the input
 
 
 /tLEXER_PARSER :
@@ -21,13 +26,13 @@ list of bug we need to solve in minishell :
 	- (solved) no error message when cmd don't exist
 
 /tBUILTINS :
-	exit :
+	exit (solved) :
 		- (solved) does not write 'exit' when used witout args
 		- (solved) does not put an error message when confronted to an empty string
 		- (solved) does not handle '+' sign in front of arg
 		- (solved) a sign without a number behind is seen as a number (exit + is valid)
 
 /tERROR MANAGEMENT :
-	- error are WIP, so lots of error.
 
 /tOTHER :
+	- (solved) leaked fd in the reset function
