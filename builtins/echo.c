@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:06:18 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/10 14:08:41 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/10 19:04:43 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int	ft_echo(int argc, char **argv)
 {
-	int i;
+	int	i;
 
+	if (argc == 1)
+		return (printf("\n"));
 	i = 1;
 	while (!ft_strcmp(argv[i], "-n"))
 			i++;

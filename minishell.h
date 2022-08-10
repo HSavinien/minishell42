@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/10 17:51:46 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/10 18:08:16 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_global_var {
 
 typedef struct s_dico {
 	char			*key;
-	builtins_func	fct;
+	t_builtins_func	fct;
 }	t_dico;
 
 //globales==============================================================globales
