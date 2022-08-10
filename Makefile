@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 11:03:55 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/09 18:14:06 by tmongell         ###   ########.fr        #
+#    Updated: 2022/08/10 14:22:52 by cmaroude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC =	minishell.c \
 		builtins/pwd.c \
 		builtins/env.c \
 		builtins/exit.c \
+		builtins/echo.c \
 		builtins/unset.c \
 		builtins/export.c \
 		builtins/builtins_utils.c \
