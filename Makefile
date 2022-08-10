@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:38:52 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/10 19:18:23 by cmaroude         ###   ########.fr        #
+#    Updated: 2022/08/10 19:35:20 by cmaroude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,15 +47,16 @@ LIBFT = library/libft
 
 GNL = library/get_next_line
 
+READLINE = library/readline
+
 RM = rm -rf
 
 CC = gcc 
 
 CFLAGS = -Wall -Werror -Wextra
 
-DIR		:= "\"$(shell pwd)/bin\""
+COMPILEFLAGS = ${LIBFT}/libft.a ${GNL}/get_next_line.a -L${READLINE}/lib -lreadline
 
-READLINE_PATH = library/readline/
 
 #rules====================================================================rules#
 
@@ -82,10 +83,10 @@ ${GNL}/get_next_line.a:
 	@echo "gnl compiled"
 
 %.o: %.c ${INCLUDE}
-	@${CC} ${CFLAGS} -I${READLINE_PATH}/include -c $< -o $@
+	@${CC} ${CFLAGS} -I${READLINE}/include -c $< -o $@
 
 ${NAME}: library ${OBJ} ${INCLUDE}
-	@${CC} ${CFLAGS} ${OBJ} -D BIN_DIR=${DIR} ${LIBFT}/libft.a ${GNL}/get_next_line.a -o ${NAME} -L${READLINE_PATH}/lib -lreadline
+	@${CC} ${CFLAGS} ${OBJ} ${COMPILEFLAGS} -o ${NAME}
 	@echo "project compiled"
 
 clean:
@@ -104,9 +105,9 @@ fclean: clean
 re: fclean all
 
 sanitize: library
-	@${CC} ${SRC} ${LIBFT}/libft.a -lreadline ${GNL}/get_next_line.a -o ${NAME}_sani -g -fsanitize=address
+	@${CC} ${SRC} -I${READLINE}/include ${COMPILEFLAGS} -o ${NAME}_sanitize -g -fsanitize=address
 
 debug: library
-	@${CC} ${SRC} ${LIBFT}/libft.a -lreadline ${GNL}/get_next_line.a -o ${NAME}_debug -g
+	@${CC} ${SRC} -I${READLINE}/include ${COMPILEFLAGS} -o ${NAME}_debug -g
 
 .PHONY: all clean fclean re
