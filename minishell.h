@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/09 18:06:58 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/10 17:51:46 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <readline/history.h>
 # include <errno.h>
 # include <limits.h>
+# include <termios.h>
 
 # include "library/libft/libft.h"
 # include "library/get_next_line/get_next_line.h"
@@ -42,14 +43,14 @@
 //struct==================================================================struct
 
 //typedef
-typedef int (*builtins_func) (int argc, char **argv);
-typedef int	t_pipe_array[(OPEN_MAX + 1) /2][2];
+typedef int		(*t_builtins_func) (int argc, char **argv);
+typedef int		t_pipe_array[(OPEN_MAX + 1) / 2][2];//pas a la norme
 
 //struct
 typedef struct s_lst_token {
 	char				*content;
 	int					index;
-	struct	s_lst_token	*next;
+	struct s_lst_token	*next;
 }	t_lst_token;
 
 typedef struct s_fd_redir {
@@ -63,7 +64,6 @@ typedef struct s_global_var {
 	char			**env;
 	int				ret;
 }	t_global_var;
-
 
 typedef struct s_dico {
 	char			*key;
@@ -88,7 +88,7 @@ int			lexer_checkcase(char *line);
 char		*trim_token(char *src);
 int			parser_entry(t_lst_token *tokens, t_fd_redir *fds);
 void		ft_heredoc(char *stop, t_fd_redir *fds);
-void		do_pipe (t_lst_token *cmd, int nb_pipe, t_fd_redir *fds);
+void		do_pipe(t_lst_token *cmd, int nb_pipe, t_fd_redir *fds);
 void		dup_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes);
 void		close_unused_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes);
 void		close_all_except(t_pipe_array pipes, int except1, int except2);
@@ -98,45 +98,45 @@ int			exec_cmd(char	*cmd, char **args, char **env);
 int			try_builtins(char **std_args);
 
 //signals
-
+void		init_signal(struct termios *read_prompt, struct termios *exec);
 
 //utils
-char	**ft_construct(t_lst_token *token);
-void	ft_break(t_lst_token *start, t_lst_token **actual);
-void	ft_skip(t_lst_token **tmp, int skip);//not used anymore
-void	do_redirect_chevron(char *chevron, char *file, t_fd_redir *fds);
-void	check_forbidden_ends(t_lst_token *token);
-int		is_chevron(char *str);
+char		**ft_construct(t_lst_token *token);
+void		ft_break(t_lst_token *start, t_lst_token **actual);
+void		ft_skip(t_lst_token **tmp, int skip);//not used anymore
+void		do_redirect_chevron(char *chevron, char *file, t_fd_redir *fds);
+void		check_forbidden_ends(t_lst_token *token);
+int			is_chevron(char *str);
 
 //error management
-void	open_error(char *file);
-void	tech_error(char *msg);
-int		max_var_len(char **env);
+void		open_error(char *file);
+void		tech_error(char *msg);
+int			max_var_len(char **env);
 
 
 //debug
-void	 error(char	*msg);
-void	destroy_lst(t_lst_token *lst);
-void	display_lst(t_lst_token	*lst);
+void		error(char *msg);
+void		destroy_lst(t_lst_token *lst);
+void		display_lst(t_lst_token	*lst);
 
 
 
 //builtins
-int		ft_pwd(int argc, char **argv);
-int		ft_env(int argc, char **argv);
-int		ft_exit(int argc, char **argv);
-int		ft_unset(int argc, char **argv);
-int		ft_cd(int argc, char **argv);
-int		ft_export(int argc, char **argv);
-int		ft_echo(int argc, char **argv);
+int			ft_pwd(int argc, char **argv);
+int			ft_env(int argc, char **argv);
+int			ft_exit(int argc, char **argv);
+int			ft_unset(int argc, char **argv);
+int			ft_cd(int argc, char **argv);
+int			ft_export(int argc, char **argv);
+int			ft_echo(int argc, char **argv);
 
 
 //builtins utils
-int		ft_find_index(char **env, char *env_srch, int len);
-int		ft_str_is_valid(char *str);
-char	**ft_realloc_char(char **ptr, int len, int hidden, char *str);
-void	ft_add_env(char *str, int hidden);
-void	ft_exchange_env(int index, char *argv);
-void	ft_remove_element(int *index);
+int			ft_find_index(char **env, char *env_srch, int len);
+int			ft_str_is_valid(char *str);
+char		**ft_realloc_char(char **ptr, int len, int hidden, char *str);
+void		ft_add_env(char *str, int hidden);
+void		ft_exchange_env(int index, char *argv);
+void		ft_remove_element(int *index);
 
 #endif

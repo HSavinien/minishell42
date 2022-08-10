@@ -7,3 +7,6 @@
 *.tar.gz
 
 minishell
+minishell_*
+library/readline
+
