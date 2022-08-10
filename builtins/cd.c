@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 19:24:30 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/10 19:55:56 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:11:27 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_exchange_path_pwd(char *str)
 	var_new = ft_strjoin(str, pwd);
 	if (index_var == -1)
 		ft_add_env(var_new, 0);
-	if (!g_varvalues.env[index_var])
+	if (index_var == -1 || !g_varvalues.env[index_var])
 		return (EXIT_SUCCESS);
 	free(g_varvalues.env[index_var]);
 	g_varvalues.env[index_var] = var_new;
