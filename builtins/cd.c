@@ -6,13 +6,13 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 19:24:30 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/10 19:08:15 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/10 19:55:56 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_exchange_path_pwd(char *str)
+int	ft_exchange_path_pwd(char *str)
 {
 	char	*pwd;
 	int		index_var;
@@ -20,14 +20,22 @@ void	ft_exchange_path_pwd(char *str)
 
 	pwd = NULL;
 	pwd = getcwd(pwd, 0);
+	if (pwd == NULL)
+	{
+		ft_putstr_fd("cd: error retrieving current directory: ", 2);
+		ft_putstr_fd("getcwd: cannot access parent directories:", 2);
+		ft_putendl_fd(strerror(errno), 2);
+		return (EXIT_FAILURE);
+	}
 	index_var = ft_find_index(g_varvalues.env, str, ft_strlen(str));
 	var_new = ft_strjoin(str, pwd);
 	if (index_var == -1)
 		ft_add_env(var_new, 0);
 	if (!g_varvalues.env[index_var])
-		return ;
+		return (EXIT_SUCCESS);
 	free(g_varvalues.env[index_var]);
 	g_varvalues.env[index_var] = var_new;
+	return (EXIT_SUCCESS);
 }
 
 char	*ft_get_path(char **env, char *env_srch, int len_srch)
@@ -55,8 +63,8 @@ int	ft_chdir(char *path, char *str)
 		ft_putendl_fd(strerror(errno), 2);
 		return (EXIT_FAILURE);
 	}
-	ft_exchange_path_pwd("OLDPWD=");
-	ft_exchange_path_pwd("PWD=");
+	if (!ft_exchange_path_pwd("OLDPWD="))
+		ft_exchange_path_pwd("PWD=");
 	return (EXIT_SUCCESS);
 }
 
