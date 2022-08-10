@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:47 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/10 15:15:29 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:08:55 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	exec_cmd(char	*cmd, char **args, char **env)
 	int		pid;
 	int		i;
 
+	if(!cmd)
+		return (0);
 	if (try_builtins(args))
 		return (0);
 	pid = fork();

@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:46:28 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/09 19:29:39 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:08:15 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	parser_chevron(t_lst_token *token, t_fd_redir *fds)
 	{
 		if (is_chevron(token->content))
 			token = aplie_chevron(token, &re_start, fds);
+		if (token)
 		token = token->next;
 	}
 	std_args = ft_construct(re_start);
