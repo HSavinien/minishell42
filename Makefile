@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/28 11:03:55 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/10 14:22:52 by cmaroude         ###   ########.fr        #
+#    Created: 2022/08/10 17:38:52 by cmaroude          #+#    #+#              #
+#    Updated: 2022/08/10 17:41:17 by cmaroude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = minishell
 
 SRC =	minishell.c \
 		filler_function.c \
+		sig_handling.c \
 		srcs/var_expander.c \
 		srcs/expander_utils.c \
 		srcs/lexer.c \
@@ -54,11 +55,18 @@ CFLAGS = -Wall -Werror -Wextra
 
 DIR		:= "\"$(shell pwd)/bin\""
 
+READLINE_PATH = library/readline/
+
 #rules====================================================================rules#
 
-all: ${NAME}
+all: library ${NAME}
 
-library:	libft	gnl
+library:	libft	gnl    readline
+
+${READLINE_PATH}:
+	sh ./install_readline.sh
+
+readline: ${READLINE_PATH}
 
 libft:
 	@make -sC ${LIBFT}
@@ -68,9 +76,12 @@ gnl:
 	@make -sC ${GNL}
 	@echo "gnl compiled"
 
+%.o: %.c ${INCLUDE}
+	@$(CC) $(CFLAGS) -I$(READLINE_PATH)/include -c $< -o $@
+
 $(NAME): ${OBJ} ${INCLUDE}
 	@make library
-	@${CC} ${CFLAGS} ${OBJ} -D BIN_DIR=${DIR} ${LIBFT}/libft.a ${GNL}/get_next_line.a -o ${NAME} -lreadline
+	@${CC} ${CFLAGS} ${OBJ} -D BIN_DIR=${DIR} ${LIBFT}/libft.a ${GNL}/get_next_line.a -o ${NAME} -L$(READLINE_PATH)/lib -lreadline
 	@echo "project compiled"
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 11:46:51 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/04 18:43:51 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/10 17:10:27 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	init_global(char **env)
 int	main(int ac, char **av, char **env)
 {
 	t_fd_redir	*fds;
+	struct termios	read_prompt;
+	struct termios	exec;
 	char			*line;
 
 	if (ac == 2)
@@ -87,15 +89,20 @@ int	main(int ac, char **av, char **env)
 	else if (ac >= 2)
 		return (printf("Error, arguments invalid\n"));
 	//do initialisation here if needed
+	init_signal(&read_prompt, &exec);
 	fds = init_fd();
 	init_global(env);
 	while (42)
 	{
+		tcsetattr(STDIN_FILENO, TCSAFLUSH, &read_prompt);
 		reset_redirection(fds);
-		reset_signal();
+	//	reset_signal();
 		line = readline(PS1);
-		if (line && line[0])
+		if (!line && printf("\033[1A%sexit\n", rl_prompt))
+			return (0);
+		if (line[0])
 			add_history(line);
+		tcsetattr(STDIN_FILENO, TCSAFLUSH, &exec);
 		use_line(line, fds);
 	//	free(line);
 	}
