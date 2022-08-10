@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:38:52 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/10 17:41:17 by cmaroude         ###   ########.fr        #
+#    Updated: 2022/08/10 19:18:23 by cmaroude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,24 +64,28 @@ all: library ${NAME}
 library:	libft	gnl    readline
 
 ${READLINE_PATH}:
-	sh ./install_readline.sh
+	@sh ./install_readline.sh
+	@echo "readline downloaded" 
 
 readline: ${READLINE_PATH}
 
-libft:
+libft: ${LIBFT}/libft.a
+
+${LIBFT}/libft.a:
 	@make -sC ${LIBFT}
 	@echo "libft compiled"
 
-gnl:
+gnl: ${GNL}/get_next_line.a
+
+${GNL}/get_next_line.a:
 	@make -sC ${GNL}
 	@echo "gnl compiled"
 
 %.o: %.c ${INCLUDE}
-	@$(CC) $(CFLAGS) -I$(READLINE_PATH)/include -c $< -o $@
+	@${CC} ${CFLAGS} -I${READLINE_PATH}/include -c $< -o $@
 
-$(NAME): ${OBJ} ${INCLUDE}
-	@make library
-	@${CC} ${CFLAGS} ${OBJ} -D BIN_DIR=${DIR} ${LIBFT}/libft.a ${GNL}/get_next_line.a -o ${NAME} -L$(READLINE_PATH)/lib -lreadline
+${NAME}: library ${OBJ} ${INCLUDE}
+	@${CC} ${CFLAGS} ${OBJ} -D BIN_DIR=${DIR} ${LIBFT}/libft.a ${GNL}/get_next_line.a -o ${NAME} -L${READLINE_PATH}/lib -lreadline
 	@echo "project compiled"
 
 clean:

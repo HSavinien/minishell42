@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 11:46:51 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/10 17:55:04 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/10 19:22:57 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	main(int ac, char **av, char **env)
 	init_global(env);
 	while (42)
 	{
-		tcsetattr(STDIN_FILENO, TCSAFLUSH, &read_prompt);
+		tcsetattr(STDIN_FILENO, TCSANOW, &read_prompt);
 		reset_redirection(fds);
 	//	reset_signal();
 		line = readline(PS1);
@@ -101,7 +101,7 @@ int	main(int ac, char **av, char **env)
 			return (0);
 		if (line[0])
 			add_history(line);
-		tcsetattr(STDIN_FILENO, TCSAFLUSH, &exec);
+		tcsetattr(STDIN_FILENO, TCSANOW, &exec);
 		use_line(line, fds);
 	}
 }
