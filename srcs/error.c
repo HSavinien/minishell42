@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 16:52:57 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/10 15:14:39 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:57:10 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,10 @@ void	tech_error(char *msg)
 	printf("technical error : %s\n", msg);
 	dup2(save, 1);
 	exit(1);
+}
+
+void	error(char *msg)
+{
+	printf("Error : %s\n", msg);
+	exit(127);
 }

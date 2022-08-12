@@ -6,15 +6,14 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:38:52 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/12 15:19:13 by tmongell         ###   ########.fr        #
+#    Updated: 2022/08/12 15:54:30 by cmaroude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRC =	minishell.c \
-		filler_function.c \
-		sig_handling.c \
+		srcs/sig_handling.c \
 		srcs/var_expander.c \
 		srcs/expander_utils.c \
 		srcs/lexer.c \

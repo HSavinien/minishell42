@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:47 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/12 15:41:49 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:51:59 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	exec_cmd(char	*cmd, char **args, char **env)
 	waitpid(pid, &i, 0);
 	if (i == SIGINT)
 		g_varvalues.ret = i + 128;
-	else	
+	else
 		g_varvalues.ret = WEXITSTATUS(i);
 	close(1);
 	return (0);

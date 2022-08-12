@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 11:46:51 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/12 13:52:27 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/12 16:01:03 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,10 @@ int	exec_script(char *script, char **env)
 	(void) env;
 }
 
-void	reset_signal(void)
-{
-}
-
 t_fd_redir	*init_fd(void)
 {
 	t_fd_redir	*fds;
-	
+
 	fds = malloc(sizeof(t_fd_redir));
 	fds->in = 0;
 	fds->out = 1;
@@ -62,7 +58,7 @@ void	use_line(char *line, t_fd_redir *fds)
 
 void	init_global(char **env)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (env[len])
@@ -78,7 +74,7 @@ void	init_global(char **env)
 
 int	main(int ac, char **av, char **env)
 {
-	t_fd_redir	*fds;
+	t_fd_redir		*fds;
 	struct termios	read_prompt;
 	struct termios	exec;
 	char			*line;
@@ -87,7 +83,6 @@ int	main(int ac, char **av, char **env)
 		return (exec_script(av[1], env));
 	else if (ac >= 2)
 		return (printf("Error, arguments invalid\n"));
-	//do initialisation here if needed
 	init_signal(&read_prompt, &exec);
 	fds = init_fd();
 	init_global(env);
@@ -95,7 +90,6 @@ int	main(int ac, char **av, char **env)
 	{
 		tcsetattr(STDIN_FILENO, TCSANOW, &read_prompt);
 		reset_redirection(fds);
-	//	reset_signal();
 		line = readline(PS1);
 		if (!line && printf("\033[1A%sexit\n", rl_prompt))
 			return (g_varvalues.ret);
