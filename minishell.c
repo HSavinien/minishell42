@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 11:46:51 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/10 19:22:57 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/12 13:52:27 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	main(int ac, char **av, char **env)
 	//	reset_signal();
 		line = readline(PS1);
 		if (!line && printf("\033[1A%sexit\n", rl_prompt))
-			return (0);
+			return (g_varvalues.ret);
 		if (line[0])
 			add_history(line);
 		tcsetattr(STDIN_FILENO, TCSANOW, &exec);

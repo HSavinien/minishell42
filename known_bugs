@@ -34,8 +34,11 @@ list of bug we need to solve in minishell :
 		- (solved) does not put an error message when confronted to an empty string
 		- (solved) does not handle '+' sign in front of arg
 		- (solved) a sign without a number behind is seen as a number (exit + is valid)
+		- (solved) exit without arg should return last return value rather than 0.
 
-/tERROR MANAGEMENT :
+/tERROR MANAGEMENT AND CODE:
+	- signal ctrl+c should put $? at 1
+	- cmd not found should return 127
 
 /tOTHER :
 	- (solved) leaked fd in the reset function

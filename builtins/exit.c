@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 13:22:24 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/09 15:52:42 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/12 13:50:11 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int	ft_exit(int argc, char **argv)
 		exit(255);
 	}
 	if (!argv[1])
-		exit(0);
+		exit(g_varvalues.ret);
 	return (EXIT_SUCCESS);
 }
