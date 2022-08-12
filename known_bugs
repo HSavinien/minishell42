@@ -37,7 +37,7 @@ list of bug we need to solve in minishell :
 		- (solved) exit without arg should return last return value rather than 0.
 
 /tERROR MANAGEMENT AND CODE:
-	- signal ctrl+c should put $? at 1
+	- signal ctrl+c should put $? at 1 if no command is running, 127 + cmd exit status else
 	- cmd not found should return 127
 
 /tOTHER :
