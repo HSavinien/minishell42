@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:26:56 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/09 18:46:06 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/12 13:39:50 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ char	*get_var_name(char *src, int *i)
 }
 
 //search a var of given name in env, and write it's value in dst.
-//for lexer purpose, the value is writen between double quote.
+//for lexer purpose, the value is writen between -$ symboles.
+//it return the number of char written to dst. it return the number of char 
+//written on dst;
 int	copy_var(char *var_name, char *dst)
 {
 	int		i;
@@ -69,6 +71,8 @@ int	copy_var(char *var_name, char *dst)
 	int		namelen;
 	char	*tmp_str;
 
+	if (!strcmp(var_name, "?"))
+		return (expand_ret_value(dst));
 	tmp_str = ft_strjoin(var_name, "=");
 	namelen = ft_strlen(tmp_str);
 	i = 0;

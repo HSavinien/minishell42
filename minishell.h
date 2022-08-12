@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/10 18:08:16 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/12 13:34:05 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_global_var	g_varvalues;
 //lexer-parser
 int			parser_chevron(t_lst_token *token, t_fd_redir *fds);
 char		*expand_vars(char *src);
+int			expand_ret_value(char *dst);
 t_lst_token	*lexing(char *line);
 int			lexer_checkcase(char *line);
 char		*trim_token(char *src);

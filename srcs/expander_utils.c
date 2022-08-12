@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:30:36 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/07/27 17:39:43 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/12 13:39:49 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,22 @@ int	max_var_len(char **env)
 			max_len = tmp_len;
 	}
 	return (max_len + 2);
+}
+
+//this function get the return value from env, and put the coresponding str 
+//in dst. unlike the copy_var function, it does not put delimitor around the 
+//value. it return the number of char writen on dst.
+int	expand_ret_value(char *dst)
+{
+	char	*ret_value_str;
+	int		i;
+
+	ret_value_str = ft_itoa(g_varvalues.ret);
+	i = 0;
+	while (ret_value_str[i])
+	{
+		dst[i] = ret_value_str[i];
+		i ++;
+	}
+	return (i);
 }
