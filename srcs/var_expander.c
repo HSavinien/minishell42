@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:26:56 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/12 15:05:12 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:52:57 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ char	*get_var_name(char *src, int *i)
 		*i = *i + 1;
 	}
 	len ++;
-	dprintf(2, "var name is %s\n", ft_substr(src, start, len - 1));//debug
 	return (ft_substr(src, start, len - 1));
 }
 

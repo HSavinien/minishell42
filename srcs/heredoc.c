@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 14:18:19 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/10 19:18:03 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:52:29 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	send_to_pipe(char *line, char *stop, int fd)
 {
-		if (line && ft_strcmp(line, stop))
-		{
-			write(fd, line, ft_strlen(line));
-			write(fd, "\n", 1);
-		}
+	if (line && ft_strcmp(line, stop))
+	{
+		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
+	}
 }
 
 //idea : we have to read stdin with readline until the stop str is found.

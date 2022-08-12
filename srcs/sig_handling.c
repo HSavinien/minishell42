@@ -6,11 +6,11 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 10:50:38 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/12 15:27:02 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:55:21 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	sig_handler(int sig)
 {
