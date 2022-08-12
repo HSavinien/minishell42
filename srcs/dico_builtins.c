@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 18:37:21 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/09 14:56:54 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:32:45 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int	try_builtins(char **std_args)
 		i++;
 	if (!dico[i].key || ft_strcmp(dico[i].key, std_args[0]))
 		return (0);
-	dico[i].fct(argc, std_args);
+	g_varvalues.ret = dico[i].fct(argc, std_args);
 	return (1);
 }
