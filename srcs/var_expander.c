@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:26:56 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/12 15:52:57 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/12 18:12:20 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	*get_var_name(char *src, int *i)
 	start ++;
 	len = 0;
 	*i = *i + 1;
+	if (src[*i] == '?')
+		return (ft_strdup("?"))
 	while (src[*i] == '_' || ft_isalnum(src[*i]))
 	{
 		len ++;
