@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/12 13:34:05 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/12 17:32:44 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char		**ft_construct(t_lst_token *token);
 void		ft_break(t_lst_token *start, t_lst_token **actual);
 void		ft_skip(t_lst_token **tmp, int skip);//not used anymore
 void		do_redirect_chevron(char *chevron, char *file, t_fd_redir *fds);
-void		check_forbidden_ends(t_lst_token *token);
+int			check_forbidden_ends(t_lst_token *token);
 int			is_chevron(char *str);
 
 //error management
@@ -116,7 +116,7 @@ int			max_var_len(char **env);
 
 
 //debug
-void		error(char *msg);
+int			error(char *msg, int err);
 void		destroy_lst(t_lst_token *lst);
 void		display_lst(t_lst_token	*lst);
 

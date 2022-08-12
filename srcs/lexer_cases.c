@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 16:11:48 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/09 19:30:20 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/12 18:29:55 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	handle_quote(char *line, char quote)
 	while (line[i] && line[i] != quote)
 		i ++;
 	if (!line[i])
-		error("quotes not closed");
+	{
+		error("quotes not closed", 258);
+		return (-1);
+	}
 	return (i + 1);
 }
 
