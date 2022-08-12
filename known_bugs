@@ -19,7 +19,7 @@ list of bug we need to solve in minishell :
 
 /tLEXER_PARSER :
 	- (solved) lexer can sometime add random char to line;
-    - export PATH="$PATH::::::" va vider le PATH car le lexer va utiliser le nom de variable `PATH::::::`
+    - (solved) export PATH="$PATH::::::" va vider le PATH car le lexer va utiliser le nom de variable `PATH::::::`
 	- echo Salut"$USER" va afficher des caracteres <?> a la position des guillemets alors qu'il devrait rien avoir. `Salut�cmaroude�`
 	- cat|cat|cat les tokens sans espace devraient fonctionner.
 	- (solved) $? is not yet handeled
