@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:46:28 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/10 20:08:15 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/12 17:36:29 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ t_lst_token	*aplie_chevron(t_lst_token *chevron_tok, t_lst_token **lst_start,
 	t_lst_token	*prev;
 
 	if (!chevron_tok->next)
-		error("redirection must be followed by a file to redirect");
+	{
+		error("redirection must be followed by a file to redirect", 258);
+		return (NULL);
+	}
 	if (chevron_tok->content != (*lst_start)->content)
 	{
 		prev = *lst_start;
@@ -72,9 +75,8 @@ int	parser_entry(t_lst_token *tokens, t_fd_redir *fds)
 	t_lst_token	*save_start;
 	int			nb_pipe;
 
-	if (!tokens || !tokens->content)
+	if (!tokens || !tokens->content || check_forbidden_ends(tokens))
 		return (1);
-	check_forbidden_ends(tokens);
 	nb_pipe = 0;
 	save_start = tokens;
 	while (tokens)

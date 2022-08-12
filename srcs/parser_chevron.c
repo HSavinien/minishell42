@@ -6,14 +6,14 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:10 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/08 17:13:36 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/12 17:32:18 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 //function that check we don't have consecutive pipe, consecutive chevrons...
-void	check_repeting_specials(t_lst_token *token)
+int	check_repeting_specials(t_lst_token *token)
 {
 	char	*previous;
 
@@ -22,31 +22,32 @@ void	check_repeting_specials(t_lst_token *token)
 	while (token)
 	{
 		if (!ft_strcmp(previous, "|") && !ft_strcmp(token->content, "|"))
-			error("consecutive pipe forbiden");
+			return (error("consecutive pipe forbiden", 258));
 		if (is_chevron(previous) && is_chevron(token->content))
-			error("consecutive chevrons forbiden");
+			return (error("consecutive chevrons forbiden", 258));
 		if (is_chevron(previous) && !ft_strcmp(token->content, "|"))
-			error("implicit file for redirection is forbiden");
+			return (error("implicit file for redirection is forbiden", 258));
 		previous = token->content;
 		token = token->next;
 	}
+	return (0);
 }
 
 //check that the ends of the user input are not a pipe or a redirection.
-void	check_forbidden_ends(t_lst_token *token)
+int	check_forbidden_ends(t_lst_token *token)
 {
 	t_lst_token	*last;
 
 	if (!ft_strcmp(token->content, "|"))
-		error("comand cannot begin with a pipe");
+		return (error("comand cannot begin with a pipe", 258));
 	last = token;
 	while (last->next)
 		last = last->next;
 	if (!ft_strcmp(last->content, "|"))
-		error("error pipe at end");
+		return (error("error pipe at end", 258));
 	if (is_chevron(last->content))
-		error("redirection cannot be done without a file dumbass.");
-	check_repeting_specials(token);
+		return (error("redirection cannot be done without a file dumbass.", 258));
+	return (check_repeting_specials(token));
 }
 
 void	do_redirect_chevron_in(char *chevron, char *file, t_fd_redir *fds)

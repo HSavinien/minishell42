@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 16:52:57 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/12 15:57:10 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/12 17:51:29 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ void	tech_error(char *msg)
 	exit(1);
 }
 
-void	error(char *msg)
+int	error(char *msg, int err)
 {
 	printf("Error : %s\n", msg);
-	exit(127);
+	g_varvalues.ret = err;
+	return (err);
 }
