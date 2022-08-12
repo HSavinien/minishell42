@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:26:56 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/12 13:39:50 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:05:12 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,14 @@ char	*get_var_name(char *src, int *i)
 	start = *i;
 	start ++;
 	len = 0;
-	while (src[*i] && !ft_isspace(src[*i]) && src[*i] != '\"')
+	*i = *i + 1;
+	while (src[*i] == '_' || ft_isalnum(src[*i]))
 	{
 		len ++;
 		*i = *i + 1;
 	}
+	len ++;
+	dprintf(2, "var name is %s\n", ft_substr(src, start, len - 1));//debug
 	return (ft_substr(src, start, len - 1));
 }
 
