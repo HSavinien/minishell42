@@ -6,12 +6,43 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/10 15:16:55 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/13 16:29:56 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #define LOG_FILE "./lexer_log"
+
+//check if the char nb i of str line should mark the end of a token, 
+//and the start of a new token. it return 1 if it is an end token, 0 if it isnt
+int	is_end_token(char *line, int i)
+{
+	if (line[i] == '\0')
+		return (1);
+	if (isspace(line[i]))
+		return (1);
+	if (line[i] == '|')
+		return (1);
+	if (line[i] == '<')
+		return (1);
+	if (line[i] == '>')
+		return (1);
+	return(0);
+}
+
+t_lst_token	*get_special_token(char *line, int *i, t_lst_token *tok)
+{
+	int	len;
+	int	start = *i;
+
+	if (line[*i + 1] == line [*i])
+		len = 2;
+	else
+		len = 1;
+	*i = *i + len;
+	tok->content = ft_substr(line, start, *i - start);
+	return (tok);
+}
 
 //get_tokens : get the line and the index of the first char to handle.
 //return the extracted token and set index to the next char to handle.
@@ -26,7 +57,9 @@ static t_lst_token	*get_token(char *line, int *i)
 	while (line[*i] && ft_isspace(line[*i]))
 		*i += 1;
 	token_start = *i;
-	while (line[*i] && !ft_isspace(line[*i]))
+	if (line[*i] == '|' || line[*i] == '<' || line[*i] == '>')
+		return(get_special_token(line, i, new));
+	while (line[*i] && !is_end_token(line, *i))
 		*i = *i + lexer_checkcase(line + *i);
 	new->content = ft_substr(line, token_start, *i - token_start);
 	return (new);
