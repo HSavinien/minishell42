@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/13 20:17:05 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/13 20:32:56 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,9 @@ char		**ft_realloc_char(char **ptr, int len, int hidden, char *str);
 void		ft_add_env(char *str, int hidden);
 void		ft_exchange_env(int index, char *argv);
 void		ft_remove_element(int *index);
+
+//aditional functionality
+int			load_logfile(char *logfile);
+void		add_logfile(char *line);
 
 #endif

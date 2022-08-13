@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:38:52 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/13 20:26:16 by cmaroude         ###   ########.fr        #
+#    Updated: 2022/08/13 20:41:56 by tmongell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = minishell
 
 SRC =	minishell.c \
 		additional_functions/script.c \
+		additional_functions/log.c \
 		srcs/sig_handling.c \
 		srcs/var_expander.c \
 		srcs/expander_utils.c \
