@@ -6,19 +6,11 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 11:46:51 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/13 15:06:49 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/13 20:20:55 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	exec_script(char *script, char **env)
-{
-	printf("script execution not yet implemented\n");
-	return (1);
-	(void) script;
-	(void) env;
-}
 
 t_fd_redir	*init_fd(void)
 {
@@ -81,13 +73,14 @@ int	main(int ac, char **av, char **env)
 	struct termios	exec;
 	char			*line;
 
-	if (ac == 2)
-		return (exec_script(av[1], env));
-	else if (ac >= 2)
-		return (printf("Error, arguments invalid\n"));
 	init_signal(&read_prompt, &exec);
 	fds = init_fd();
 	init_global(env);
+	if (ac == 2)
+		return (exec_script(av[1], exec, fds));
+	else if (ac >= 2)
+		return (printf("Error, arguments invalid\n") + 102);
+	load_conf(".minishellrc", exec, fds);
 	while (42)
 	{
 		tcsetattr(STDIN_FILENO, TCSANOW, &read_prompt);

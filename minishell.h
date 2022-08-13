@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/13 15:06:56 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/13 20:17:05 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ t_global_var	g_varvalues;
 
 //reading and history
 //static void	add_logfile(char *line);
-
+//script
+int			exec_script(char *script, struct termios exec, t_fd_redir *fds);
+void		use_line(char *line, t_fd_redir *fds);
+void		load_conf(char *conf_file, struct termios exec, t_fd_redir *fds);
 
 //lexer-parser
 int			parser_chevron(t_lst_token *token, t_fd_redir *fds);
