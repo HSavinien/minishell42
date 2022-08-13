@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/13 17:11:06 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/13 17:18:36 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static t_lst_token	*get_token(char *line, int *i)
 		return(get_special_token(line, i, new));
 	while (line[*i] && !is_end_token(line, *i))
 		*i = *i + lexer_checkcase(line + *i);
-	while (line[*i] && !ft_isspace(line[*i]))
+	while (line[*i] && !is_end_token(line, *i))
 	{
 		check_case = lexer_checkcase(line + *i);
 		if (check_case == -1)
