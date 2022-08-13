@@ -11,7 +11,7 @@ list of bug we need to solve in minishell :
 		- when doing multiple output redirection, second file is not created;
 		- (solved) endless printing of prompt when doing multiple redirection including at least one input redirection, without cmd;
 		- when doing multiple redirect with one input redir and some output redir, the first output file is not created. if there was only one output file, it says cmd not found.
-	- when redirectiong output to a file with no right, do cmd normaly
+	- (solved) when redirectiong output to a file with no right, do cmd normaly
 	- heredocs (solved) :
 		- (solved) do not put '\n' between lines
 		- (solved) does not consider the first line of the input

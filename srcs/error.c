@@ -6,35 +6,33 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 16:52:57 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/12 15:57:10 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/13 15:19:22 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	open_error(char *file_name)
+int	open_error(char *file_name, int err)
 {
-	int	save;
-
-	save = dup(1);
-	dup2(2, 1);
-	printf("Error : cannot open file  %s\n", file_name);
-	dup2(save, 1);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(file_name, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putendl_fd(strerror(errno), 2);
+	g_varvalues.ret = err;
+	return (1);
 }
 
-void	tech_error(char *msg)
+int	tech_error(char *msg, int err)
 {	
-	int	save;
-
-	save = dup(1);
-	dup2(2, 1);
-	printf("technical error : %s\n", msg);
-	dup2(save, 1);
-	exit(1);
+	ft_putstr_fd("technical error: ", 2);
+	ft_putendl_fd(msg, 2);
+	g_varvalues.ret = err;
+	return (err);
 }
 
-void	error(char *msg)
+int	error(char *msg, int err)
 {
 	printf("Error : %s\n", msg);
-	exit(127);
+	g_varvalues.ret = err;
+	return (err);
 }

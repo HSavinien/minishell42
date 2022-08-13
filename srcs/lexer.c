@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/13 16:29:56 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/13 16:33:34 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,14 @@ static t_lst_token	*get_token(char *line, int *i)
 {
 	t_lst_token	*new;
 	int			token_start;
+	int			check_case;
 
 	new = malloc(sizeof(t_lst_token));
 	if (!new)
-		error("unexpected malloc error");
+	{
+		error("unexpected malloc error", 127);
+		return (NULL);
+	}
 	while (line[*i] && ft_isspace(line[*i]))
 		*i += 1;
 	token_start = *i;
@@ -61,6 +65,13 @@ static t_lst_token	*get_token(char *line, int *i)
 		return(get_special_token(line, i, new));
 	while (line[*i] && !is_end_token(line, *i))
 		*i = *i + lexer_checkcase(line + *i);
+	while (line[*i] && !ft_isspace(line[*i]))
+	{
+		check_case = lexer_checkcase(line + *i);
+		if (check_case == -1)
+			return (NULL);
+		*i = *i + check_case;
+	}
 	new->content = ft_substr(line, token_start, *i - token_start);
 	return (new);
 }
@@ -87,10 +98,14 @@ t_lst_token	*lexing(char *line)
 	if (!line || !ft_strlen(line))
 		return (NULL);
 	tokens = get_token(line, &i);
+	if (!tokens)
+		return (NULL);
 	last = tokens;
 	while (line[i])
 	{
 		last->next = get_token(line, &i);
+		if (!last->next)
+			return (NULL);
 		last = last->next;
 	}
 	last->next = NULL;
