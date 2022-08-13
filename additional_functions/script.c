@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 19:35:01 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/13 20:19:51 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/13 20:46:46 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	exec_script(char *script, struct termios exec, t_fd_redir *fds)
 			break ;
 		if (line[0] != '#')
 		{
-			if (line[ft_strlen(line)] == '\n')
-				line[ft_strlen(line)] = '\0';
+			if (line[ft_strlen(line) - 1] == '\n')
+				line[ft_strlen(line) - 1] = '\0';
 			use_line(line, fds);
 		}
 	}
