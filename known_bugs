@@ -8,7 +8,7 @@ list of bug we need to solve in minishell :
 	- (solved) multiple bugs when using chevrons without cmd :
 		- (solved) segfault when doing a single redirection (in or out) without cmd;
 		- (solved) freeze when doing multiple output redirection without cmd;
-		- when doing multiple output redirection, second file is not created;
+		- (solved) when doing multiple output redirection, second file is not created;
 		- (solved) endless printing of prompt when doing multiple redirection including at least one input redirection, without cmd;
 		- (solved) when doing multiple redirect with one input redir and some output redir, the first output file is not created. if there was only one output file, it says cmd not found.
 	- (solved) when redirectiong output to a file with no right, do cmd normaly
