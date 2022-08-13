@@ -23,7 +23,7 @@ list of bug we need to solve in minishell :
 	- (solved) echo Salut"$USER" va afficher des caracteres <?> a la position des guillemets alors qu'il devrait rien avoir. `Salut�cmaroude�`
 	- (solved) cat|cat|cat les tokens sans espace devraient fonctionner.
 	- (solved) $? is not yet handeled
-	- Quand on fait `cat .gitignore      `, cat est lance pour .gitignore et considere l'espace a la fin comme un fichier/argument et affiche "cat: : No such file or directory"
+	- (solved) when the line read end with spaces, they are seen as a token and create bugs such as `cat : : No such file or directory`
 
 /tGENERAL SYNTAXE :
 	- (solved) no difference between 'echo "|" ls' and 'echo | ls'

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/13 17:18:36 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/13 19:19:17 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,17 @@ int	is_end_token(char *line, int i)
 		return (1);
 	if (line[i] == '>')
 		return (1);
-	return(0);
+	return (0);
 }
 
 t_lst_token	*get_special_token(char *line, int *i, t_lst_token *tok)
 {
 	int	len;
-	int	start = *i;
+	int	start;
 
+	start = *i;
+	if (!line[*i])
+		return (tok);
 	if (line[*i + 1] == line [*i])
 		len = 2;
 	else
@@ -53,16 +56,14 @@ static t_lst_token	*get_token(char *line, int *i)
 	int			check_case;
 
 	new = malloc(sizeof(t_lst_token));
-	if (!new)
-	{
-		error("unexpected malloc error", 127);
+	if (!new && error("unexpected malloc error", 127))
 		return (NULL);
-	}
+	new->content = NULL;
 	while (line[*i] && ft_isspace(line[*i]))
 		*i += 1;
 	token_start = *i;
-	if (line[*i] == '|' || line[*i] == '<' || line[*i] == '>')
-		return(get_special_token(line, i, new));
+	if (line[*i] == '|' || line[*i] == '<' || line[*i] == '>' || !line[*i])
+		return (get_special_token(line, i, new));
 	while (line[*i] && !is_end_token(line, *i))
 		*i = *i + lexer_checkcase(line + *i);
 	while (line[*i] && !is_end_token(line, *i))
@@ -106,6 +107,8 @@ t_lst_token	*lexing(char *line)
 		last->next = get_token(line, &i);
 		if (!last->next)
 			return (NULL);
+		if (!last->next->content)
+			break ;
 		last = last->next;
 	}
 	last->next = NULL;
