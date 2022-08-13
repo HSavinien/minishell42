@@ -5,12 +5,12 @@ list of bug we need to solve in minishell :
 
 /tCHEVRONS :
 	- (solved) no new prompt after a '<' or '<<' chevron : we can type stuff, but it does nothing;
-	- multiple bugs when using chevrons without cmd :
+	- (solved) multiple bugs when using chevrons without cmd :
 		- (solved) segfault when doing a single redirection (in or out) without cmd;
 		- (solved) freeze when doing multiple output redirection without cmd;
 		- when doing multiple output redirection, second file is not created;
 		- (solved) endless printing of prompt when doing multiple redirection including at least one input redirection, without cmd;
-		- when doing multiple redirect with one input redir and some output redir, the first output file is not created. if there was only one output file, it says cmd not found.
+		- (solved) when doing multiple redirect with one input redir and some output redir, the first output file is not created. if there was only one output file, it says cmd not found.
 	- (solved) when redirectiong output to a file with no right, do cmd normaly
 	- heredocs (solved) :
 		- (solved) do not put '\n' between lines
