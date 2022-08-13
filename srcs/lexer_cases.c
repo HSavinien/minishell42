@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 16:11:48 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/12 18:29:55 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/13 17:04:36 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,20 @@ void	remove_last_quote(char *str, char quote)
 	}
 }
 
+void	remove_negative_char(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < 0)
+			ft_strlcpy(str + i, str + i + 1, ft_strlen(str + i));
+		else
+			i ++;
+	}
+}
+
 //this take a string, and remove any quote or assimilated around the token.
 char	*trim_token(char *src)
 {
@@ -95,5 +109,6 @@ char	*trim_token(char *src)
 	}
 	else
 		trimed = remove_quote(src);
+	remove_negative_char(trimed);
 	return (trimed);
 }
