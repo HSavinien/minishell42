@@ -6,13 +6,14 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:38:52 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/15 19:33:40 by tmongell         ###   ########.fr        #
+#    Updated: 2022/08/15 19:53:53 by tmongell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRC =	minishell.c \
+		init.c \
 		additional_functions/script.c \
 		additional_functions/log.c \
 		srcs/sig_handling.c \

@@ -6,23 +6,11 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 11:46:51 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/15 16:49:46 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 19:59:16 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_fd_redir	*init_fd(void)
-{
-	t_fd_redir	*fds;
-
-	fds = malloc(sizeof(t_fd_redir));
-	fds->in = 0;
-	fds->out = 1;
-	fds->base_stdin = dup(0);
-	fds->base_stdout = dup(1);
-	return (fds);
-}
 
 void	reset_redirection(t_fd_redir *fds)
 {
@@ -51,20 +39,10 @@ void	use_line(char *line, t_fd_redir *fds)
 	parser_entry(cmd_list, fds);
 }
 
-void	init_global(char **env)
+void	load_files(struct termios exec, t_fd_redir *fds)
 {
-	int	len;
-
-	len = 0;
-	while (env[len])
-		len++;
-	g_varvalues.env = malloc(sizeof(char *) * (len + 2));
-	len = -1;
-	while (env[++len])
-		g_varvalues.env[len] = ft_strdup(env[len]);
-	g_varvalues.env[len] = NULL;
-	g_varvalues.env[len + 1] = NULL;
-	g_varvalues.ret = 0;
+	load_conf(".minishellrc", exec, fds);
+	load_logfile(".minishell_history");
 }
 
 int	main(int ac, char **av, char **env)
@@ -81,8 +59,7 @@ int	main(int ac, char **av, char **env)
 		return (exec_script(av[1], exec, fds));
 	else if (ac >= 2)
 		return (printf("Error, arguments invalid\n") + 102);
-	load_conf(".minishellrc", exec, fds);
-	load_logfile(".minishell_history");
+	load_files(exec, fds);
 	while (42)
 	{
 		tcsetattr(STDIN_FILENO, TCSANOW, &read_prompt);

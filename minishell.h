@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/15 19:46:12 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 19:53:26 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ typedef struct s_dico {
 t_global_var	g_varvalues;
 
 //prototypes==========================================================prototypes
+
+//initialisation
+t_fd_redir	*init_fd(void);
+void		init_global(char **env);
 
 //expander
 char		*expand_vars(char *src);
