@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:38:52 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/15 19:25:39 by cmaroude         ###   ########.fr        #
+#    Updated: 2022/08/15 19:33:40 by tmongell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,10 +85,10 @@ ${GNL}/get_next_line.a:
 	@echo "gnl compiled"
 
 %.o: %.c ${INCLUDE}
-	@${CC} ${CFLAGS} -I${READLINE}/include -c $< -o $@
+	${CC} ${CFLAGS} -I${READLINE}/include -c $< -o $@
 
 ${NAME}: library ${OBJ} ${INCLUDE}
-	@${CC} ${CFLAGS} ${OBJ} ${COMPILEFLAGS} -o ${NAME}
+	${CC} ${CFLAGS} ${OBJ} ${COMPILEFLAGS} -o ${NAME}
 	@echo "project compiled"
 
 clean:

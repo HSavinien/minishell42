@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 14:14:20 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/15 14:24:53 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 19:41:26 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,39 +47,4 @@ char	**ft_construct(t_lst_token *token)
 	}
 	std_args[i] = NULL;
 	return (std_args);
-}
-
-void	ft_break(t_lst_token *start, t_lst_token **actual)
-{
-	t_lst_token	*tmp_start;
-
-	tmp_start = start;
-	if (actual == NULL)
-		return ;
-	while (tmp_start != NULL)
-	{
-		if (ft_strcmp(tmp_start->next->content, "|") == 0)
-		{
-			tmp_start->next = NULL;
-			break ;
-		}
-		tmp_start = tmp_start->next;
-	}
-	if (ft_strcmp((*actual)->content, "|") == 0)
-		*actual = (*actual)->next;
-}
-
-void	ft_skip(t_lst_token **tmp, int skip)
-{
-	int			i;
-	t_lst_token	*tmptoken;
-
-	i = 0;
-	if (*tmp == NULL)
-		return ;
-	tmptoken = *tmp;
-	if (skip == 2)
-		(*tmp) = (*tmp)->next->next;
-	if (skip == 1)
-		(*tmp) = ((*tmp)->next);
 }
