@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 19:26:28 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/13 20:42:30 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 12:40:40 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	load_logfile(char *logfile)
 void	add_logfile(char *line)
 {
 	int	fd;
+
 	fd = open(".minishell_history", O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd < 0)
 		return ;

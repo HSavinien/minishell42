@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:38:52 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/13 20:41:56 by tmongell         ###   ########.fr        #
+#    Updated: 2022/08/15 18:19:03 by cmaroude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,7 @@ ${GNL}/get_next_line.a:
 	@echo "gnl compiled"
 
 %.o: %.c ${INCLUDE}
-	${CC} ${CFLAGS} -I${READLINE}/include -c $< -o $@
+	@${CC} ${CFLAGS} -I${READLINE}/include -c $< -o $@
 
 ${NAME}: library ${OBJ} ${INCLUDE}
 	@${CC} ${CFLAGS} ${OBJ} ${COMPILEFLAGS} -o ${NAME}
@@ -100,15 +100,19 @@ fclean: clean
 	@make -sC ${LIBFT} fclean
 	@make -sC ${GNL} fclean
 	@${RM} ${NAME}
+	@${RM} ${NAME}_debug
+	@${RM} ${NAME}_sanitize
 	@${RM} ${NAME}.dSYM
+	@${RM} ${NAME}_debug.dSYM
+	@${RM} ${NAME}_sanitize.dSYM
 	@echo "executable removed"
 
 re: fclean all
 
 sanitize: library
-	@${CC} ${SRC} -I${READLINE}/include ${COMPILEFLAGS} -o ${NAME}_sanitize -g -fsanitize=address
+	${CC} ${SRC} -I${READLINE}/include ${COMPILEFLAGS} -o ${NAME}_sanitize -g -fsanitize=address
 
 debug: library
-	@${CC} ${SRC} -I${READLINE}/include ${COMPILEFLAGS} -o ${NAME}_debug -g
+	${CC} ${SRC} -I${READLINE}/include ${COMPILEFLAGS} -o ${NAME}_debug -g
 
 .PHONY: all clean fclean re

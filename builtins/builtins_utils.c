@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 18:32:34 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/09 17:23:28 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/15 18:46:28 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	**ft_realloc_char(char **ptr, int len, int hidden, char *str)
 			if (num++ == hidden)
 			{
 				j++;
-				temp_ptr[i] = str;
+				temp_ptr[i] = ft_strdup(str);
 			}
 		}
 		temp_ptr[i + j] = ptr[i];
