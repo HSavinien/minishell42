@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:10 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/13 15:21:23 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/15 16:21:22 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	check_repeting_specials(t_lst_token *token)
 	while (token)
 	{
 		if (!ft_strcmp(previous, "|") && !ft_strcmp(token->content, "|"))
-			return (error("consecutive pipe forbiden", 258));
+			return (error("consecutive pipe forbiden", 258, token));
 		if (is_chevron(previous) && is_chevron(token->content))
-			return (error("consecutive chevrons forbiden", 258));
+			return (error("consecutive chevrons forbiden", 258, token));
 		if (is_chevron(previous) && !ft_strcmp(token->content, "|"))
-			return (error("implicit file for redirection is forbiden", 258));
+			return (error("no file name between chevron and pipe", 258, token));
 		previous = token->content;
 		token = token->next;
 	}
@@ -39,15 +39,15 @@ int	check_forbidden_ends(t_lst_token *token)
 	t_lst_token	*last;
 
 	if (!ft_strcmp(token->content, "|"))
-		return (error("comand cannot begin with a pipe", 258));
+		return (error("comand cannot begin with a pipe", 258, token));
 	last = token;
 	while (last->next)
 		last = last->next;
 	if (!ft_strcmp(last->content, "|"))
-		return (error("error pipe at end", 258));
+		return (error("error pipe at end", 258, token));
 	if (is_chevron(last->content))
 		return (error("redirection cannot be done without a file dumbass."
-				, 258));
+				, 258, token));
 	return (check_repeting_specials(token));
 }
 

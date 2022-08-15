@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 16:52:57 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/13 15:19:22 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/15 16:03:57 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ int	tech_error(char *msg, int err)
 	return (err);
 }
 
-int	error(char *msg, int err)
+int	error(char *msg, int err, t_lst_token *freeable_lst)
 {
 	printf("Error : %s\n", msg);
 	g_varvalues.ret = err;
+	destroy_lst(freeable_lst);
 	return (err);
 }

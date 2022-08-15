@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:48:58 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/15 14:26:08 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:33:09 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	display_lst(t_lst_token	*lst)
 	printf("\n");
 }
 
-void	destroy_lst(t_lst_token *lst)
+void	*destroy_lst(t_lst_token *lst)
 {
 	t_lst_token	*tmp;
 
@@ -35,6 +35,7 @@ void	destroy_lst(t_lst_token *lst)
 		free(lst);
 		lst = tmp;
 	}
+	return (NULL);
 }
 
 //function that free a null terminated array of str, and return 0;

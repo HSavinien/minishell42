@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:46:28 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/15 13:56:15 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:38:19 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@ int	is_chevron(char *str)
 	return (0);
 }
 
+void	*destroy_chevron_lst(t_lst_token *tok, void *to_return)
+{
+	free(tok->next->content);
+	free(tok->next);
+	free(tok->content);
+	free(tok);
+	return (to_return);
+}
+
 t_lst_token	*aplie_chevron(t_lst_token *chevron_tok, t_lst_token **lst_start,
 	t_fd_redir *fds, int *err)
 {
@@ -28,7 +37,7 @@ t_lst_token	*aplie_chevron(t_lst_token *chevron_tok, t_lst_token **lst_start,
 	t_lst_token	*prev;
 
 	if (!chevron_tok->next && ++(*err)
-		&& error("redirection must be followed by a file to redirect", 258))
+		&& error("chevron must be followed by a file name", 258, *lst_start))
 		return (NULL);
 	if (chevron_tok->content != (*lst_start)->content)
 	{
@@ -46,8 +55,8 @@ t_lst_token	*aplie_chevron(t_lst_token *chevron_tok, t_lst_token **lst_start,
 	chevron = chevron_tok->content;
 	redirect_file = chevron_tok->next->content;
 	if (do_redirect_chevron(chevron, redirect_file, fds) && ++(*err))
-		return (NULL);
-	return (prev);
+		return (destroy_chevron_lst(chevron_tok, NULL));
+	return (destroy_chevron_lst(chevron_tok, prev));
 }
 
 int	parser_chevron(t_lst_token *token, t_fd_redir *fds)
@@ -65,7 +74,7 @@ int	parser_chevron(t_lst_token *token, t_fd_redir *fds)
 		if (is_chevron(token->content))
 			token = aplie_chevron(token, &re_start, fds, &err);
 		if (err != 0)
-			return (-1);
+			return ((int) destroy_lst(re_start) - 1);
 		if (token && !is_chevron(token->content))
 			token = token->next;
 	}

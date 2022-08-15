@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:47 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/15 14:30:26 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 16:22:17 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ char	**get_path(char **env)
 	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
 		i ++;
 	if (!env[i])
-		exit(error("cmd not found (no PATH)", 127));
+		exit(error("cmd not found (no PATH)", 127, NULL));
 	path = ft_split(ft_strchr(env[i], '=') + 1, ':');
 	if (!*path)
-		exit(error("cmd not found (PATH empty)", 127));
+		exit(error("cmd not found (PATH empty)", 127, NULL));
 	return (path);
 }
 
@@ -59,7 +59,7 @@ int	exec_cmd(char	*cmd, char **args, char **env)
 		while (path[i])
 			try_path(cmd, path[i ++], args, env);
 		destroy_array(path);
-		exit(error("command not found", 127));
+		exit(error("command not found", 127, NULL));
 	}
 	waitpid(pid, &i, 0);
 	if (i == SIGINT)

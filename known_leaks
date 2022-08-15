@@ -1,0 +1,5 @@
+- (solved) redirection token (chevrons + filename) are not freed
+- (solved) in case of pipe, the cmd are not freed in the main process
+- (solved) most error from token in invalid place would cause leaks
+- (solved) open quote cause leaks
+- (solved) chevron redirecting to incorect file cause leaks

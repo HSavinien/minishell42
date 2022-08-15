@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/15 14:55:13 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:33:34 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void		close_unused_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes);
 void		close_all_except(t_pipe_array pipes, int except1, int except2);
 void		wait_all_pipes(int *pid, int num_cmd);
 void		close_two(int fd1, int fd2);
+void		*lexer_error(char *line, t_lst_token *lst);
 
 //execution
 int			exec_cmd(char	*cmd, char **args, char **env);
@@ -121,8 +122,8 @@ int			max_var_len(char **env);
 
 
 //debug
-int			error(char *msg, int err);
-void		destroy_lst(t_lst_token *lst);
+int			error(char *msg, int err, t_lst_token *freeable_lst);
+void		*destroy_lst(t_lst_token *lst);
 void		display_lst(t_lst_token	*lst);
 int			destroy_array(char **array);
 
