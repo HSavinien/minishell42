@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:48:58 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/15 13:24:07 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 14:26:08 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	destroy_lst(t_lst_token *lst)
 	while (lst)
 	{
 		tmp = lst->next;
+		lst->next = NULL;
 		free(lst->content);
+		lst->content = NULL;
 		free(lst);
 		lst = tmp;
 	}
