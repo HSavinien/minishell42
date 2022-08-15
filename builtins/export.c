@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:46:22 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/09 17:24:08 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/15 19:07:10 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,11 @@ int	ft_export_add(char *argv, char **var_name, int hidden)
 			ft_remove_element(&index_ex);
 			ft_add_env(argv, hidden);
 		}
-	}		
-	else
-		return (print_export_err(argv));
-	return (EXIT_SUCCESS);
+		destroy_array(var_name);
+		return (EXIT_SUCCESS);
+	}
+	destroy_array(var_name);
+	return (print_export_err(argv));
 }
 
 int	ft_export(int argc, char **argv)

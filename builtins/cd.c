@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 19:24:30 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/10 20:11:27 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/15 19:10:09 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	ft_exchange_path_pwd(char *str)
 	}
 	index_var = ft_find_index(g_varvalues.env, str, ft_strlen(str));
 	var_new = ft_strjoin(str, pwd);
+	free(pwd);
 	if (index_var == -1)
 		ft_add_env(var_new, 0);
 	if (index_var == -1 || !g_varvalues.env[index_var])
