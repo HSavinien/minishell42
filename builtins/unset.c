@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:39:48 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/09 16:25:05 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/15 19:26:24 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,6 @@ int	print_unset_err(char *str)
 	ft_putstr_fd(str, 2);
 	ft_putendl_fd("': not a valid identifier, try harder!", 2);
 	return (1);
-}
-
-void	ft_remove_element(int *index)
-{
-	int	i;
-	int	len_env;
-
-	i = 0;
-	while (g_varvalues.env[i])
-		i++;
-	if (g_varvalues.env[i + 1])
-	{
-		i++;
-		while (g_varvalues.env[i])
-			i++;
-	}
-	len_env = i;
-	if (!g_varvalues.env[*index])
-		return ;
-	free(g_varvalues.env[*index]);
-	while (*index < len_env)
-	{
-		g_varvalues.env[*index] = g_varvalues.env[(*index) + 1];
-		(*index)++;
-	}
 }
 
 int	ft_unset(int argc, char **argv)

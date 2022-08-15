@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 18:32:34 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/15 18:46:28 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/15 19:26:07 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,6 @@ int	ft_find_index(char **env, char *env_srch, int len_srch)
 				return (i);
 	}
 	return (-1);
-}
-
-void	ft_add_env(char *str, int hidden)
-{
-	int		i;
-	int		j;
-	char	**env;
-
-	i = -1;
-	j = 0;
-	env = g_varvalues.env;
-	while (env[++i])
-		if (env[i + 1] == '\0')
-			j = i + 1;
-	while (env[++i])
-		if (env[i + 1] == '\0')
-			j = i + 1;
-	g_varvalues.env = ft_realloc_char(env, i + 1, hidden, str);
-}
-
-void	ft_exchange_env(int index, char *argv)
-{
-	free(g_varvalues.env[index]);
-	g_varvalues.env[index] = argv;
 }
 
 char	**ft_realloc_char(char **ptr, int len, int hidden, char *str)
