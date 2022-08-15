@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/15 13:25:01 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 14:55:13 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void		do_pipe(t_lst_token *cmd, int nb_pipe, t_fd_redir *fds);
 void		dup_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes);
 void		close_unused_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes);
 void		close_all_except(t_pipe_array pipes, int except1, int except2);
+void		wait_all_pipes(int *pid, int num_cmd);
+void		close_two(int fd1, int fd2);
 
 //execution
 int			exec_cmd(char	*cmd, char **args, char **env);

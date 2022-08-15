@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:34:05 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/13 15:07:06 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/15 14:54:35 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ void	do_pipe(t_lst_token *cmd, int nb_pipe, t_fd_redir *fds)
 	t_lst_token		*sub_cmd;
 
 	pid = ft_calloc(nb_pipe + 2, sizeof(int));
+	if (!pid)
+		tech_error("unexpected malloc error", 258);
+	dprintf(2, "pid array at %p\n", pid);//DEBUG
 	if (init_pipe(pipe_ends, nb_pipe))
 		tech_error("could not open some pipes", 258);
 	num_cmd = -1;
@@ -107,11 +110,8 @@ void	do_pipe(t_lst_token *cmd, int nb_pipe, t_fd_redir *fds)
 		if (!pid[num_cmd])
 			return (pipe_child(sub_cmd, num_cmd, pipe_ends, fds));
 		if (num_cmd)
-		{
-			close(pipe_ends[num_cmd - 1][0]);
-			close(pipe_ends[num_cmd - 1][1]);
-		}
+			close_two(pipe_ends[num_cmd - 1][0], pipe_ends[num_cmd -1][1]);
+		destroy_lst(sub_cmd);
 	}
-	while (num_cmd >= 0)
-		waitpid(pid[num_cmd --], NULL, 0);
+	wait_all_pipes(pid, num_cmd);
 }

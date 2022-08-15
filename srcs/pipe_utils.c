@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:24:39 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/09 19:35:11 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/15 14:54:57 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ void	close_unused_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes)
 		close_all_except(pipes, pipes[num_cmd -1][0], pipes[num_cmd][1]);
 }
 
+void	close_two(int fd1, int fd2)
+{
+	close(fd1);
+	close(fd2);
+}
+
 void	dup_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes)
 {
 	if (num_cmd == 0)
@@ -54,4 +60,11 @@ void	dup_pipe(int num_cmd, int nb_pipe, t_pipe_array pipes)
 		dup2(pipes[num_cmd -1][0], 0);
 		dup2(pipes[num_cmd][1], 1);
 	}
+}
+
+void	wait_all_pipes(int *pid, int num_cmd)
+{
+	while (num_cmd >= 0)
+		waitpid(pid[num_cmd --], NULL, 0);
+	free (pid);
 }
