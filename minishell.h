@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/13 20:32:56 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:25:01 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int			max_var_len(char **env);
 int			error(char *msg, int err);
 void		destroy_lst(t_lst_token *lst);
 void		display_lst(t_lst_token	*lst);
+int			destroy_array(char **array);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:48:58 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/28 14:51:02 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:24:07 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,18 @@ void	destroy_lst(t_lst_token *lst)
 		free(lst);
 		lst = tmp;
 	}
+}
+
+//function that free a null terminated array of str, and return 0;
+int	destroy_array(char **array)
+{
+	int	i;
+
+	if (!array)
+		return (0);
+	i = 0;
+	while (array[i])
+		free(array[i++]);
+	free(array);
+	return (0);
 }

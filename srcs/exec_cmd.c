@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:47 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/13 17:10:35 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:30:20 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ static void	try_path(char *cmd, char *path, char **args, char **env)
 {
 	char	*cmd_path;
 
-	cmd_path = ft_strjoin(path, "/");
-	cmd_path = ft_strjoin(cmd_path, cmd);
+	path = ft_strjoin(path, "/");
+	cmd_path = ft_strjoin(path, cmd);
+	free(path);
 	execve(cmd_path, args, env);
 	free(cmd_path);
 }
@@ -57,6 +58,7 @@ int	exec_cmd(char	*cmd, char **args, char **env)
 		i = 0;
 		while (path[i])
 			try_path(cmd, path[i ++], args, env);
+		destroy_array(path);
 		exit(error("command not found", 127));
 	}
 	waitpid(pid, &i, 0);
@@ -65,5 +67,5 @@ int	exec_cmd(char	*cmd, char **args, char **env)
 	else
 		g_varvalues.ret = WEXITSTATUS(i);
 	close(1);
-	return (0);
+	return (destroy_array(args));
 }
