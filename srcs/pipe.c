@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:34:05 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/15 14:54:35 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:46:12 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void	do_pipe(t_lst_token *cmd, int nb_pipe, t_fd_redir *fds)
 	pid = ft_calloc(nb_pipe + 2, sizeof(int));
 	if (!pid)
 		tech_error("unexpected malloc error", 258);
-	dprintf(2, "pid array at %p\n", pid);//DEBUG
 	if (init_pipe(pipe_ends, nb_pipe))
 		tech_error("could not open some pipes", 258);
 	num_cmd = -1;
