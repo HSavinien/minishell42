@@ -8,5 +8,6 @@
 
 minishell
 minishell_*
+.minishell_history
 library/readline
 
