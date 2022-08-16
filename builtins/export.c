@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:46:22 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/15 19:07:10 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/16 17:29:53 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,11 @@ int	ft_export_add(char *argv, char **var_name, int hidden)
 int	ft_export(int argc, char **argv)
 {
 	int		i;
+	int		ret;
 	int		hidden;
 	char	**var_name;
 
+	ret = EXIT_SUCCESS;
 	if (argc == 1)
 		return (ft_print_export(g_varvalues.env));
 	i = 0;
@@ -106,7 +108,7 @@ int	ft_export(int argc, char **argv)
 			hidden = 1;
 		}
 		if (ft_export_add(argv[i], var_name, hidden) != 0)
-			return (EXIT_FAILURE);
+			ret = EXIT_FAILURE;
 	}
-	return (EXIT_SUCCESS);
+	return (ret);
 }
