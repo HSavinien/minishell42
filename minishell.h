@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/16 16:30:50 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/16 16:37:55 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 
 //typedef
 typedef int		(*t_builtins_func) (int argc, char **argv);
-typedef int		t_pipe_array[(OPEN_MAX + 1) / 2][2];//pas a la norme
+typedef int		t_pipe_array[5120][2]; //5120 is ((OPEN_MAX + 1)/2)
 
 //struct
 typedef struct s_lst_token {
