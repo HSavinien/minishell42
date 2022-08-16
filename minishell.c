@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 11:46:51 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/15 19:59:16 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/16 17:54:16 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	use_line(char *line, t_fd_redir *fds)
 
 void	load_files(struct termios exec, t_fd_redir *fds)
 {
-	load_conf(".minishellrc", exec, fds);
-	load_logfile(".minishell_history");
+	load_conf(CONF_FILE, exec, fds);
+	load_logfile(HISTORY);
 }
 
 int	main(int ac, char **av, char **env)

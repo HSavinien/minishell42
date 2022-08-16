@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:38:52 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/16 16:46:25 by tmongell         ###   ########.fr        #
+#    Updated: 2022/08/16 17:54:53 by tmongell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,10 @@ SRC =	minishell.c \
 
 OBJ = ${SRC:.c=.o}
 
+HISTORY_PATH = '"$(HOME)/.minishell_history"'
+
+CONF_PATH = '"$(HOME)/.minishellrc"'
+
 INCLUDE = minishell.h
 
 LIBFT = library/libft
@@ -56,7 +60,7 @@ RM = rm -rf
 
 CC = gcc 
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -D HISTORY=${HISTORY_PATH} -D CONF_FILE=${CONF_PATH}
 
 COMPILEFLAGS = ${LIBFT}/libft.a ${GNL}/get_next_line.a -L${READLINE}/lib -lreadline
 
@@ -64,6 +68,9 @@ COMPILEFLAGS = ${LIBFT}/libft.a ${GNL}/get_next_line.a -L${READLINE}/lib -lreadl
 #rules====================================================================rules#
 
 all: library ${NAME}
+
+stuff :
+	echo ${HISTORY}
 
 library:	libft	gnl    readline
 
