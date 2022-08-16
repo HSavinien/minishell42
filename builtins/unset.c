@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:39:48 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/16 17:39:45 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:04:23 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	ft_unset(int argc, char **argv)
 		{
 			env_srch = argv[i];
 			j = ft_find_index(g_varvalues.env, env_srch, ft_strlen(env_srch));
-			dprintf(2, "index: %d\n", j);
 			if (j != -1 && g_varvalues.env[j])
 				ft_remove_element(&j);
 		}
