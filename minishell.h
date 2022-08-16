@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/15 19:53:26 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/16 17:17:28 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 
 //typedef
 typedef int		(*t_builtins_func) (int argc, char **argv);
-typedef int		t_pipe_array[(OPEN_MAX + 1) / 2][2];//pas a la norme
+typedef int		t_pipe_array[5120][2]; //5120 is ((OPEN_MAX + 1)/2)
 
 //struct
 typedef struct s_lst_token {
@@ -101,6 +101,7 @@ int			parser_chevron(t_lst_token *token, t_fd_redir *fds);
 int			do_redirect_chevron(char *chevron, char *file, t_fd_redir *fds);
 void		ft_heredoc(char *stop, t_fd_redir *fds);
 int			is_chevron(char *str);
+void		*destroy_chevron_lst(t_lst_token *tok, void *to_return);
 
 //pipes
 void		do_pipe(t_lst_token *cmd, int nb_pipe, t_fd_redir *fds);
@@ -121,6 +122,8 @@ void		init_signal(struct termios *read_prompt, struct termios *exec);
 void		*destroy_lst(t_lst_token *lst);
 void		display_lst(t_lst_token	*lst);
 int			destroy_array(char **array);
+int			ft_structlstsize(t_lst_token *token);
+void		*ret_free(void *ptr);
 
 //error management
 int			open_error(char *file, int err);

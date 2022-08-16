@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/15 17:23:53 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/16 17:21:10 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_end_token(char *line, int i)
 {
 	if (line[i] == '\0')
 		return (1);
-	if (isspace(line[i]))
+	if (ft_isspace(line[i]))
 		return (1);
 	if (line[i] == '|')
 		return (1);
@@ -60,6 +60,8 @@ static t_lst_token	*get_token(char *line, int *i)
 		return (NULL);
 	while (line[*i] && ft_isspace(line[*i]))
 		*i += 1;
+	if (!line[*i])
+		return (ret_free(new));
 	token_start = *i;
 	if (line[*i] == '|' || line[*i] == '<' || line[*i] == '>' || !line[*i])
 		return (get_special_token(line, i, new));
@@ -67,10 +69,7 @@ static t_lst_token	*get_token(char *line, int *i)
 	{
 		check_case = lexer_checkcase(line + *i);
 		if (check_case == -1)
-		{	
-			free(new);
-			return (NULL);
-		}
+			return (ret_free(new));
 		*i = *i + check_case;
 	}
 	new->content = ft_substr(line, token_start, *i - token_start);

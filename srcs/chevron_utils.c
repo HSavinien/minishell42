@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   logfile.c                                          :+:      :+:    :+:   */
+/*   chevron_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/28 14:37:52 by tmongell          #+#    #+#             */
-/*   Updated: 2022/07/28 14:48:11 by tmongell         ###   ########.fr       */
+/*   Created: 2022/08/16 16:15:40 by tmongell          #+#    #+#             */
+/*   Updated: 2022/08/16 16:15:56 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#define LOGFILE "./.cmd_log"
 
-static void	add_logfile(char *line)
+int	is_chevron(char *str)
 {
-	int	fd;
+	if (!ft_strcmp(str, "<") || !ft_strcmp(str, "<<") || !ft_strcmp(str, ">")
+		|| !ft_strcmp(str, ">>"))
+		return (1);
+	return (0);
+}
 
-	fd = open(LOGFILE, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	if (fd > 0)
-	{
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
-	}
-	close(fd);
+void	*destroy_chevron_lst(t_lst_token *tok, void *to_return)
+{
+	free(tok->next->content);
+	free(tok->next);
+	free(tok->content);
+	free(tok);
+	return (to_return);
 }

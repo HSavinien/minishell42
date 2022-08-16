@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_utils.c                                        :+:      :+:    :+:   */
+/*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:48:58 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/15 17:33:09 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/16 17:17:44 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,23 @@ int	destroy_array(char **array)
 		free(array[i++]);
 	free(array);
 	return (0);
+}
+
+int	ft_structlstsize(t_lst_token *token)
+{
+	int	size;
+
+	size = 0;
+	while (token)
+	{
+		token = token->next;
+		size ++;
+	}
+	return (size);
+}
+
+void	*ret_free(void *ptr)
+{
+	free(ptr);
+	return (NULL);
 }
