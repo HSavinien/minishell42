@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:26:56 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/12 18:15:25 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:13:26 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ int	copy_var(char *var_name, char *dst)
 	int		namelen;
 	char	*tmp_str;
 
-	if (!strcmp(var_name, "?"))
+	if (!ft_strcmp(var_name, "?"))
 		return (expand_ret_value(dst));
 	tmp_str = ft_strjoin(var_name, "=");
 	namelen = ft_strlen(tmp_str);
 	i = 0;
 	while (g_varvalues.env[i]
-		&& strncmp(g_varvalues.env[i], tmp_str, namelen))
+		&& ft_strncmp(g_varvalues.env[i], tmp_str, namelen))
 		i ++;
 	free (tmp_str);
 	if (!g_varvalues.env[i])

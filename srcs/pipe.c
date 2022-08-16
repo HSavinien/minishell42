@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:34:05 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/15 17:46:12 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:11:53 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_lst_token	*get_subcmd(t_lst_token **base_cmd, int num_cmd, int nb_pipe)
 	if (num_cmd == nb_pipe)
 		return (*base_cmd);
 	sub_cmd = *base_cmd;
-	while ((*base_cmd)->next && strcmp((*base_cmd)->next->content, "|"))
+	while ((*base_cmd)->next && ft_strcmp((*base_cmd)->next->content, "|"))
 		(*base_cmd) = (*base_cmd)->next;
 	if (!*base_cmd)
 		tech_error("somehow called pipe function on pipeless file", 258);
