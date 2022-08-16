@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:38:52 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/15 19:53:53 by tmongell         ###   ########.fr        #
+#    Updated: 2022/08/16 16:29:02 by tmongell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,21 +16,22 @@ SRC =	minishell.c \
 		init.c \
 		additional_functions/script.c \
 		additional_functions/log.c \
-		srcs/sig_handling.c \
-		srcs/var_expander.c \
-		srcs/expander_utils.c \
-		srcs/lexer.c \
-		srcs/lexer_cases.c \
-		srcs/parser.c \
-		srcs/parser_utils.c \
-		srcs/parser_chevron.c \
-		srcs/heredoc.c \
-		srcs/pipe.c \
-		srcs/pipe_utils.c \
+		srcs/chevron_utils.c \
+		srcs/dico_builtins.c \
 		srcs/error.c \
 		srcs/exec_cmd.c \
-		srcs/lst_utils.c \
-		srcs/dico_builtins.c \
+		srcs/general_utils.c \
+		srcs/heredoc.c \
+		srcs/lexer.c \
+		srcs/lexer_utils.c \
+		srcs/parser.c \
+		srcs/parser_chevron.c \
+		srcs/pipe.c \
+		srcs/pipe_utils.c \
+		srcs/sig_handling.c \
+		srcs/token_trimer.c \
+		srcs/var_expander.c \
+		srcs/var_expander_utils.c \
 		builtins/cd.c \
 		builtins/pwd.c \
 		builtins/env.c \
@@ -40,7 +41,6 @@ SRC =	minishell.c \
 		builtins/export.c \
 		builtins/builtins_utils.c \
 		builtins/builtins_utils_env.c \
-
 
 OBJ = ${SRC:.c=.o}
 

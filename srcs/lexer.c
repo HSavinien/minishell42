@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/15 17:23:53 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/16 15:44:59 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_end_token(char *line, int i)
 {
 	if (line[i] == '\0')
 		return (1);
-	if (isspace(line[i]))
+	if (ft_isspace(line[i]))
 		return (1);
 	if (line[i] == '|')
 		return (1);
