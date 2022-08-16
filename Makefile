@@ -6,7 +6,7 @@
 #    By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 17:38:52 by cmaroude          #+#    #+#              #
-#    Updated: 2022/08/16 16:29:02 by tmongell         ###   ########.fr        #
+#    Updated: 2022/08/16 16:46:25 by tmongell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,11 +67,11 @@ all: library ${NAME}
 
 library:	libft	gnl    readline
 
-${READLINE_PATH}:
+${READLINE}:
 	@sh ./install_readline.sh
 	@echo "readline downloaded" 
 
-readline: ${READLINE_PATH}
+readline: ${READLINE}
 
 libft: ${LIBFT}/libft.a
 
