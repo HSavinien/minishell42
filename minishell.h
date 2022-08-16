@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/16 16:37:55 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/16 17:17:28 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void		*destroy_lst(t_lst_token *lst);
 void		display_lst(t_lst_token	*lst);
 int			destroy_array(char **array);
 int			ft_structlstsize(t_lst_token *token);
+void		*ret_free(void *ptr);
 
 //error management
 int			open_error(char *file, int err);

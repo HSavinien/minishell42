@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:48:58 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/16 16:21:58 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/16 17:17:44 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,10 @@ int	ft_structlstsize(t_lst_token *token)
 		size ++;
 	}
 	return (size);
+}
+
+void	*ret_free(void *ptr)
+{
+	free(ptr);
+	return (NULL);
 }
