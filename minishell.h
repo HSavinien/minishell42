@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/17 17:20:19 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:44:51 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void		give_index(t_lst_token *lst);
 //parser
 int			parser_entry(t_lst_token *tokens, t_fd_redir *fds);
 char		*trim_token(char *src);
-int			check_forbidden_ends(t_lst_token *token);
+int			check_forbidden_ends(t_lst_token *token, t_lst_token *start);
 char		**ft_construct(t_lst_token *token);
 
 //chevrons
@@ -128,7 +128,7 @@ void		*ret_free(void *ptr);
 
 //error management
 int			open_error(char *file, int err);
-int			tech_error(char *msg, int err);
+int			tech_error(char *msg, int err, t_lst_token *token);
 int			error(char *msg, int err, t_lst_token *freeable_lst);
 
 //builtins

@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:46:28 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/16 16:20:15 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:48:06 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	parser_entry(t_lst_token *tokens, t_fd_redir *fds)
 	t_lst_token	*save_start;
 	int			nb_pipe;
 
-	if (!tokens || !tokens->content || check_forbidden_ends(tokens))
+	save_start = tokens;
+	if (!tokens || !tokens->content || check_forbidden_ends(tokens, save_start))
 		return (1);
 	nb_pipe = 0;
-	save_start = tokens;
 	while (tokens)
 	{
 		if (!ft_strcmp(tokens->content, "|"))
@@ -35,7 +35,7 @@ int	parser_entry(t_lst_token *tokens, t_fd_redir *fds)
 }
 
 //function that check we don't have consecutive pipe, consecutive chevrons...
-int	check_repeting_specials(t_lst_token *token)
+int	check_repeting_specials(t_lst_token *token, t_lst_token *start)
 {
 	char	*previous;
 
@@ -44,11 +44,11 @@ int	check_repeting_specials(t_lst_token *token)
 	while (token)
 	{
 		if (!ft_strcmp(previous, "|") && !ft_strcmp(token->content, "|"))
-			return (error("consecutive pipe forbiden", 258, token));
+			return (error("consecutive pipe forbiden", 258, start));
 		if (is_chevron(previous) && is_chevron(token->content))
-			return (error("consecutive chevrons forbiden", 258, token));
+			return (error("consecutive chevrons forbiden", 258, start));
 		if (is_chevron(previous) && !ft_strcmp(token->content, "|"))
-			return (error("no file name between chevron and pipe", 258, token));
+			return (error("no file name between chevron and pipe", 258, start));
 		previous = token->content;
 		token = token->next;
 	}
@@ -56,7 +56,7 @@ int	check_repeting_specials(t_lst_token *token)
 }
 
 //check that the ends of the user input are not a pipe or a redirection.
-int	check_forbidden_ends(t_lst_token *token)
+int	check_forbidden_ends(t_lst_token *token, t_lst_token *start)
 {
 	t_lst_token	*last;
 
@@ -66,11 +66,11 @@ int	check_forbidden_ends(t_lst_token *token)
 	while (last->next)
 		last = last->next;
 	if (!ft_strcmp(last->content, "|"))
-		return (error("error pipe at end", 258, token));
+		return (error("error pipe at end", 258, start));
 	if (is_chevron(last->content))
 		return (error("redirection cannot be done without a file dumbass."
 				, 258, token));
-	return (check_repeting_specials(token));
+	return (check_repeting_specials(token, start));
 }
 
 char	**ft_construct(t_lst_token *token)

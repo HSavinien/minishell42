@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:34:05 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/16 18:11:53 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/17 18:07:41 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_lst_token	*get_subcmd(t_lst_token **base_cmd, int num_cmd, int nb_pipe)
 	while ((*base_cmd)->next && ft_strcmp((*base_cmd)->next->content, "|"))
 		(*base_cmd) = (*base_cmd)->next;
 	if (!*base_cmd)
-		tech_error("somehow called pipe function on pipeless file", 258);
+		tech_error("called pipe function on pipeless file (WTF)", 258, sub_cmd);
 	before_pipe = (*base_cmd);
 	*base_cmd = (*base_cmd)->next->next;
 	free(before_pipe->next->content);
@@ -96,16 +96,16 @@ void	do_pipe(t_lst_token *cmd, int nb_pipe, t_fd_redir *fds)
 
 	pid = ft_calloc(nb_pipe + 2, sizeof(int));
 	if (!pid)
-		tech_error("unexpected malloc error", 258);
+		tech_error("unexpected malloc error", 258, cmd);
 	if (init_pipe(pipe_ends, nb_pipe))
-		tech_error("could not open some pipes", 258);
+		tech_error("could not open some pipes", 258, cmd);
 	num_cmd = -1;
 	while (++ num_cmd <= nb_pipe)
 	{
 		sub_cmd = get_subcmd(&cmd, num_cmd, nb_pipe);
 		pid[num_cmd] = fork();
 		if (pid[num_cmd] < 0)
-			tech_error("that was your last forking mistake, kid", 258);
+			tech_error("that was your last forking mistake, kid", 258, cmd);
 		if (!pid[num_cmd])
 			return (pipe_child(sub_cmd, num_cmd, pipe_ends, fds));
 		if (num_cmd)

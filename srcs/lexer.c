@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/17 17:04:06 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:36:10 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static t_lst_token	*get_token(char *line, int *i)
 	int			check_case;
 
 	new = ft_calloc(sizeof(t_lst_token), 1);
-	if (!new && tech_error("unexpected malloc error", 127))
+	if (!new && tech_error("unexpected malloc error", 127, new))
 		return (NULL);
 	while (line[*i] && ft_isspace(line[*i]))
 		*i += 1;

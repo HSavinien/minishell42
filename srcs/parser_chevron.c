@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:58:10 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/16 16:22:13 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/17 18:06:57 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	do_redirect_chevron_in(char *chevron, char *file, t_fd_redir *fds)
 		dup2(fds->in, 0);
 	}
 	else
-		return (tech_error("entered redir_chevron_in with wrong chevron", 258));
+		return (tech_error("entered redir_chevron_in with wrong chevron", 258,
+				NULL));
 	return (0);
 }
 

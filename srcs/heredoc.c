@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 14:18:19 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/13 15:06:06 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:35:28 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_heredoc(char	*stop, t_fd_redir *fds)
 	close(fds->in);
 	dup2(fds->base_stdin, 0);
 	if (pipe(pipe_fd))
-		tech_error("could not creat pipe for heredoc", 258);
+		tech_error("could not creat pipe for heredoc", 258, NULL);
 	line = readline(PS2);
 	send_to_pipe(line, stop, pipe_fd[1]);
 	while (line && ft_strcmp(line, stop))
