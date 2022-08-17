@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/17 16:18:48 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:04:06 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,38 +76,19 @@ static t_lst_token	*get_token(char *line, int *i)
 	return (new);
 }
 
-void	give_index(t_lst_token *lst)
+int	get_each_token(t_lst_token *tokens, char *line, int i)
 {
-	int	index;
-
-	index = 0;
-	while (lst)
-	{
-		lst->index = index ++;
-		lst = lst->next;
-	}
-}
-
-t_lst_token	*lexing(char *line)
-{
-	int			i;
 	int			error;
-	t_lst_token	*tokens;
 	t_lst_token	*last;
 
 	error = 0;
-	i = 0;
-	if (!line || !ft_strlen(line))
-		return (lexer_error(line, NULL));
-	tokens = get_token(line, &i);
-	if (!tokens)
-		return (lexer_error(line, NULL));
 	last = tokens;
 	while (line[i])
 	{
 		last->next = get_token(line, &i);
-		if (!last->next){
-			error =1;
+		if (!last->next)
+		{
+			error = 1;
 			break ;
 		}
 		if (!last->next->content)
@@ -115,8 +96,25 @@ t_lst_token	*lexing(char *line)
 		last = last->next;
 	}
 	last->next = NULL;
-	if (error)
-		return(lexer_error(line, tokens));
+	return (error);
+}
+
+t_lst_token	*lexing(char *line)
+{
+	int			i;
+	int			error;
+	t_lst_token	*tokens;
+
+	i = 0;
+	g_varvalues.ret = 0;
+	if (!line || !ft_strlen(line))
+		return (lexer_error(line, NULL));
+	tokens = get_token(line, &i);
+	if (!tokens)
+		return (lexer_error(line, NULL));
+	error = get_each_token(tokens, line, i);
+	if (error && g_varvalues.ret)
+		return (lexer_error(line, tokens));
 	give_index(tokens);
 	free(line);
 	return (tokens);

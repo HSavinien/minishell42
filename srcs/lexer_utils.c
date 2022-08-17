@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 16:11:48 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/16 16:07:32 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:05:10 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,16 @@ void	*lexer_error(char *line, t_lst_token *lst)
 	free(line);
 	destroy_lst(lst);
 	return (NULL);
+}
+
+void	give_index(t_lst_token *lst)
+{
+	int	index;
+
+	index = 0;
+	while (lst)
+	{
+		lst->index = index ++;
+		lst = lst->next;
+	}
 }

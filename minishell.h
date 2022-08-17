@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/17 13:29:30 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:04:50 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int			max_var_len(char **env);
 t_lst_token	*lexing(char *line);
 int			lexer_checkcase(char *line);
 void		*lexer_error(char *line, t_lst_token *lst);
+void		give_index(t_lst_token *lst);
 
 //parser
 int			parser_entry(t_lst_token *tokens, t_fd_redir *fds);
