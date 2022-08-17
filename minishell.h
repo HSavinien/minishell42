@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 14:31:57 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/17 17:04:50 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:14:14 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_fd_redir	*init_fd(void);
 void		init_global(char **env);
 
 //expander
-char		*expand_vars(char *src);
+char		*expand_vars(char *src, int dquote_on);
 int			expand_ret_value(char *dst);
 int			max_var_len(char **env);
 

@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:26:56 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/16 18:13:26 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:16:06 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ int	copy_var(char *var_name, char *dst)
 //first step of parsing : take a str, replace var name by their value, and 
 //return the result. since the line to read is freed, it should have been 
 //alocated with malloc beforehand.
-char	*expand_vars(char *src)
+//the parameter dquote_on (for double quote on) should be a var, but norm...
+char	*expand_vars(char *src, int dquote_on)
 {
 	int		quote_on;
 	char	*final_line;
@@ -116,8 +117,10 @@ char	*expand_vars(char *src)
 	final_line = alocate_line(src);
 	while (src[i])
 	{
-		if (src[i] == '\'')
+		if (src[i] == '\'' && !dquote_on)
 			quote_on = quote_on + 1 % 2;
+		if (src[i] == '\"' && !quote_on)
+			dquote_on = dquote_on + 1 % 2;
 		if (src[i] == '$' && !quote_on && src[i - 1] != '\\')
 		{
 			var_name = get_var_name(src, &i);
