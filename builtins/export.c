@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:46:22 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/16 17:29:53 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:06:11 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	ft_export(int argc, char **argv)
 			var_name = ft_split(argv[i], '\0');
 			hidden = 1;
 		}
-		if (ft_export_add(argv[i], var_name, hidden) != 0)
+		if (argv[i][0] != '=' && ft_export_add(argv[i], var_name, hidden) != 0)
 			ret = EXIT_FAILURE;
 	}
 	return (ret);
