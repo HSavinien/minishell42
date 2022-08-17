@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/17 14:33:59 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:18:48 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,11 @@ void	give_index(t_lst_token *lst)
 t_lst_token	*lexing(char *line)
 {
 	int			i;
+	int			error;
 	t_lst_token	*tokens;
 	t_lst_token	*last;
 
+	error = 0;
 	i = 0;
 	if (!line || !ft_strlen(line))
 		return (lexer_error(line, NULL));
@@ -104,13 +106,17 @@ t_lst_token	*lexing(char *line)
 	while (line[i])
 	{
 		last->next = get_token(line, &i);
-		if (!last->next)
-			continue ;
+		if (!last->next){
+			error =1;
+			break ;
+		}
 		if (!last->next->content)
 			break ;
 		last = last->next;
 	}
 	last->next = NULL;
+	if (error)
+		return(lexer_error(line, tokens));
 	give_index(tokens);
 	free(line);
 	return (tokens);
