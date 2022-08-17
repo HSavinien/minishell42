@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:06:18 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/10 19:04:43 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/17 14:16:05 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_echo(int argc, char **argv)
 	if (argc == 1)
 		return (printf("\n"));
 	i = 1;
-	while (!ft_strcmp(argv[i], "-n"))
+	while (argv[i] && !ft_strncmp(argv[i], "-n", 2))
 			i++;
 	while (argv[i])
 	{
@@ -27,7 +27,7 @@ int	ft_echo(int argc, char **argv)
 		if (i <= argc - 1)
 			printf(" ");
 	}	
-	if (ft_strcmp(argv[1], "-n"))
+	if (ft_strncmp(argv[1], "-n", 2))
 		printf("\n");
 	return (0);
 }

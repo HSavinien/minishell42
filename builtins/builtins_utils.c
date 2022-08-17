@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 18:32:34 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/15 19:26:07 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/08/17 14:13:00 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ int	ft_str_is_valid(char *str)
 			if (str[i] == '=' && str[i + 1])
 				return (1);
 		i++;
+	}
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isspace(str[i ++]))
+			return (1);
 	}
 	return (0);
 }
