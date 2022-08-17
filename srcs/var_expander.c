@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:26:56 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/08/17 17:16:06 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:21:27 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,14 @@ int	copy_var(char *var_name, char *dst)
 //first step of parsing : take a str, replace var name by their value, and 
 //return the result. since the line to read is freed, it should have been 
 //alocated with malloc beforehand.
-//the parameter dquote_on (for double quote on) should be a var, but norm...
-char	*expand_vars(char *src, int dquote_on)
+//the parameter quote_on and dquote_on should be vars, but the norm...
+char	*expand_vars(char *src, int quote_on, int dquote_on)
 {
-	int		quote_on;
 	char	*final_line;
 	char	*var_name;
 	int		i;
 	int		j;
 
-	quote_on = 0;
 	i = 0;
 	j = 0;
 	final_line = alocate_line(src);
