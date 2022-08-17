@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:44:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/16 17:21:10 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/17 14:33:59 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_lst_token	*lexing(char *line)
 	{
 		last->next = get_token(line, &i);
 		if (!last->next)
-			return (lexer_error(line, tokens));
+			continue ;
 		if (!last->next->content)
 			break ;
 		last = last->next;
