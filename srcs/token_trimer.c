@@ -6,53 +6,32 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:06:22 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/16 16:07:05 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/08/19 16:07:21 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*remove_quote(char *src)
+//function that remove the char at position index in string str.
+/* example :
+ * char *str = "hello world";
+ * remove_char(str, 4);
+ * printf(%s\n, str); 
+ * shall print : hell world
+*/
+void	remove_char(char *str, int index)
 {
-	int		i;
-	int		j;
-	int		final_size;
-	char	*final;
-
-	final_size = ft_strlen (src);
-	i = 0;
-	while (src[i])
-	{
-		if (src[i] == '\'' || src[i] == '\"')
-			final_size --;
-		i ++;
-	}
-	final = ft_calloc(final_size + 1, 1);
-	i = 0;
-	j = 0;
-	while (src[i])
-	{
-		if (!(src[i] == '\'' || src[i] == '\"'))
-			final[j ++] = src[i];
-		i ++;
-	}
-	free(src);
-	return (final);
+	ft_strlcpy(str + index, str + index + 1, ft_strlen(str + index));
 }
 
-void	remove_last_quote(char *str, char quote)
+//return the index of the char before the quote
+int	remove_quote(char *src, char quote, int pos)
 {
-	int		i;
-
-	str = ft_strrchr(str, quote);
-	if (!str)
-		return ;
-	i = 0;
-	while (str[i])
-	{
-		str[i] = str[i + 1];
-		i ++;
-	}
+	remove_char(src, pos);
+	while (src[pos] && src[pos] != quote)
+		pos ++;
+	remove_char(src, pos);
+	return (pos -1);
 }
 
 void	remove_negative_char(char *str)
@@ -62,8 +41,8 @@ void	remove_negative_char(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] < 0)
-			ft_strlcpy(str + i, str + i + 1, ft_strlen(str + i));
+		if (str[i] == -'$')
+			remove_char(str, i);
 		else
 			i ++;
 	}
@@ -72,20 +51,15 @@ void	remove_negative_char(char *str)
 //this take a string, and remove any quote or assimilated around the token.
 char	*trim_token(char *src)
 {
-	char	*trimed;
-	char	quote[3];
+	int i;
 
-	quote[0] = src[0];
-	quote[1] = -('$');
-	quote[2] = '\0';
-	if (*src == '\"' || *src == '\'' || *src == -('$'))
+	i = 0;
+	while (src[i])
 	{
-		trimed = ft_strtrim(src, quote);
-		remove_last_quote(trimed, quote[0]);
-		free(src);
+		if (src[i] == '\'' || src[i] == '\"')
+			i = remove_quote(src, src[i], i);
+		i ++;
 	}
-	else
-		trimed = remove_quote(src);
-	remove_negative_char(trimed);
-	return (trimed);
+	remove_negative_char(src);
+	return (src);
 }
