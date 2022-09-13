@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:06:22 by tmongell          #+#    #+#             */
-/*   Updated: 2022/08/19 16:07:21 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:35:45 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	remove_negative_char(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == -'$')
+		if (str[i] == - '$')
 			remove_char(str, i);
 		else
 			i ++;
@@ -51,7 +51,7 @@ void	remove_negative_char(char *str)
 //this take a string, and remove any quote or assimilated around the token.
 char	*trim_token(char *src)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (src[i])
